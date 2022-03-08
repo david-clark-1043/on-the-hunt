@@ -5,8 +5,10 @@ import { HunterInvite } from "../dialog/HunterInvite";
 export const HuntCreator = (props) => {
     const history = useHistory()
 
-    const newHuntNavigate = () => {
-        history.push("/hunts/create")
+    const checkProgressNav = (event) => {
+        const [ , huntProgId, userProgId ] = event.target.id.split("--")
+        const copy = JSON.parse(JSON.stringify(props))
+        history.push(`/hunts/${huntProgId}/progress/${userProgId}`, copy)
     }
 
     return (
@@ -14,7 +16,8 @@ export const HuntCreator = (props) => {
             <main className="mainContainer">
                 <div className="huntBox">
                     <div>
-                        <h2>{props.hunt.title}</h2>
+                        <h2>Scavenger Hunt: {props.hunt.title}</h2>
+                        <h3>Clues</h3>
                         <article className="stepList">
                             {props.clues?.map(clue => {
                                 return <section className="singleStep" key={`clue--${clue.id}`}>
@@ -45,7 +48,9 @@ export const HuntCreator = (props) => {
                                     return <div className="hunterStatus">
                                         <div>{uh.user.name}</div>
                                         <div>Steps completed {uh.stepsCompleted}</div>
-                                        <button className="checkProgressButton">Check Progress</button>
+                                        <button className="checkProgressButton"
+                                            id={`userHunt--${uh.huntId}--${uh.userId}`}
+                                            onClick={checkProgressNav}>Check Progress</button>
                                     </div>
                                 }
                             })}

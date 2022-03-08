@@ -2,6 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import { CreateHunt } from "./hunts/CreateHunt";
 import { Hunt } from "./hunts/Hunt";
+import { HunterProgress } from "./hunts/HunterProgress";
 import { MyHunts } from "./hunts/MyHunts";
 
 
@@ -16,6 +17,9 @@ export const ApplicationViews = () => {
             </Route>
             <Route exact path="/hunts/:huntId(\d+)">
                 <Hunt />
+            </Route>
+            <Route exact path="/hunts/:huntId(\d+)/progress/:userId(\d+)">
+                <HunterProgress />
             </Route>
         </>
     )

@@ -6,7 +6,7 @@ export const NavBar = () => {
     return (
         <div className="navBar">
             <div className="navbar__item">
-                <Link className="navbar__link" to="/home">My Hunts</Link>
+                <Link className="navbar__link" to="/home">Home</Link>
             </div>
             <div className="navbar__item ">
                 <Link className="navbar__link" to="/hunts/create">New Hunt</Link>
