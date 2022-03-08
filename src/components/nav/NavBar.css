@@ -1,0 +1,15 @@
+.navBar {
+    display: flex;
+    margin: 1em;
+    padding: 1em;
+    border: dashed blue 1px;
+    border-radius: 1em
+}
+
+.navbar__item {
+    margin: 0 1em 0 0;
+    border: dotted green 1px;
+    padding: .2em 1em;
+    border-radius: 1em;
+}
+
