@@ -6,7 +6,7 @@ import UserHuntRepository from "../../repositories/UserHuntRepository";
 import "./MyHunt.css";
 
 export const MyHunts = () => {
-    const [hunts , setHunts] = useState([])
+    const [hunts, setHunts] = useState([])
     const [userHunts, setUserHunts] = useState([])
     const [currentUser, setUser] = useState(0)
     const history = useHistory()
@@ -43,11 +43,23 @@ export const MyHunts = () => {
                 <>
                     {filteredHunts.map(hunt => {
                         return (
-                            <button key={`huntmaster--${hunt.id}`} className="huntTitle" id={`${hunt.id}`} onClick={huntNavigate}>
-                                    {hunt.title
-                                        ? hunt.title
-                                        : hunt.hunt.title}
-                            </button>
+                            <div key={hunt.hunt?.id ? `hunter--${hunt.hunt.id}` : `huntmaster--${hunt.id}`}>
+                                {hunt.hunt
+                                        ? <button
+                                            className="huntTitle"
+                                            id={`${hunt.hunt.id}`}
+                                            onClick={huntNavigate}>
+                                            {hunt.hunt.title}
+                                        </button>
+                                        : <button
+                                            className="huntTitle"
+                                            id={`${hunt.id}`}
+                                            onClick={huntNavigate}>
+                                            {hunt.title}
+                                        </button>
+                                }
+                            </div>
+
                         )
                     })
                     }
@@ -80,7 +92,7 @@ export const MyHunts = () => {
                         </div>
                     </article>
                 </div>
-                <button className="newHuntButton" onClick={newHuntNavigate}>New Hunt</button>
+                {/* <button className="newHuntButton" onClick={newHuntNavigate}>New Hunt</button> */}
             </main>
         </>
     )

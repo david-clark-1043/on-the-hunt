@@ -1,0 +1,51 @@
+.huntBox {
+    min-width: 75%;
+    min-height: 75%;
+    margin: 1em;
+    padding: 1em;
+    border: 1px blue dashed;
+}
+
+.stepButtons {
+    display: flex;
+    flex-direction: column;
+    min-width: 15%;
+}
+
+.singleStep {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em;
+    padding: .5em;
+    border: 1px blue dashed;
+}
+
+.stepInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 70%;
+    /* text-align: center; */
+}
+
+.clueStats {
+    display: flex;
+    flex-direction: horizontal;
+    border-bottom: 1px black solid;
+}
+
+.clueStats > div {
+    margin: .1em 1em;
+}
+
+.clueText {
+    text-align: left;
+}
+
+.hunterStatus {
+    display: flex;
+    margin: 1em;
+    padding: 1em;
+    justify-content: space-between;
+    border: 1px blue dashed;
+}

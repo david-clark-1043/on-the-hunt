@@ -7,6 +7,13 @@
     max-height: 4em;
 }
 
+.stepButtons button {
+    background-color: aqua;
+    margin: .1em;
+    padding: .3em;
+    border-radius: .5em;
+}
+
 /* * {
     border: 1px dashed black;
     margin: 1em;
