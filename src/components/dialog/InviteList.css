@@ -1,0 +1,16 @@
+.inviteList {
+    max-width: fit-content;
+}
+
+.userListing {
+    display: flex;
+    text-align: left;
+    background-color: aliceblue;
+    border-radius: 1em;
+    margin: .5em;
+    padding: .5em;
+}
+
+.userListing > * {
+    margin: 0 .5em;
+}

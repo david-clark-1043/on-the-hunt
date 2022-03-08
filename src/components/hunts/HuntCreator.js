@@ -1,9 +1,12 @@
-import { Route, useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import "./HuntCreator.css";
 import { HunterInvite } from "../dialog/HunterInvite";
+import useModal from "../../hooks/useModal";
+import { ConfirmDelete } from "../dialog/ConfirmDelete";
 
 export const HuntCreator = (props) => {
     const history = useHistory()
+    const {toggleDialog: toggleDeleteDialog, modalIsOpen: deleteIsOpen } = useModal("#dialog--delete")
 
     const checkProgressNav = (event) => {
         const [ , huntProgId, userProgId ] = event.target.id.split("--")
@@ -45,7 +48,7 @@ export const HuntCreator = (props) => {
                         <article className="hunterList">
                             {props.userHunts?.map(uh => {
                                 if (uh.huntId === props.hunt.id) {
-                                    return <div className="hunterStatus">
+                                    return <div className="hunterStatus" key={`hunterStatus--${uh.id}`}>
                                         <div>{uh.user.name}</div>
                                         <div>Steps completed {uh.stepsCompleted}</div>
                                         <button className="checkProgressButton"
@@ -57,8 +60,9 @@ export const HuntCreator = (props) => {
                         </article>
                     </div>
                     <div>
-                    {HunterInvite()}
-                    <div>Delete Hunt</div>
+                    <HunterInvite hunt={props.hunt} userHunts={props.userHunts} setUserHunts={props.setUserHunts} />
+                    <ConfirmDelete toggleDeleteDialog={toggleDeleteDialog} hunt={props.hunt} />
+                    <button onClick={toggleDeleteDialog}>Delete Hunt</button> 
                     </div>
 
                 </div>

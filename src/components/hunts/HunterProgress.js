@@ -30,7 +30,7 @@ export const HunterProgress = () => {
         copy.stepsCompleted++
         delete copy.user
         delete copy.hunt
-        UserHuntRepository.sendUserHunt(copy)
+        UserHuntRepository.updateUserHunt(copy)
             .then(res => UserHuntRepository.get(res.id))
             .then((resUserHunt) => {
                 setUserHunt(resUserHunt)
