@@ -1,6 +1,6 @@
 import Settings from "./Settings";
 import { fetchIt } from "./Fetch";
-import UserHuntRepository from "./UserHuntRepository";
+// import UserHuntRepository from "./UserHuntRepository";
 
 export default {
     async get(id) {

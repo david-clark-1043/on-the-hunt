@@ -19,24 +19,46 @@ export const InviteList = ({ toggleDialog, searchInput, hunt, userHunts, setUser
     )
 
     const selectUser = (event) => {
-        const newUserHunt = {
-            huntId: parseInt(hunt.id),
-            userId: parseInt(event.target.id.split("--")[1]),
-            stepsCompleted: 0
+        let newUserHunt = {}
+        if(hunt.id === -1) {
+            newUserHunt = {
+                userId: parseInt(event.target.id.split("--")[1]),
+                stepsCompleted: 0
+            }
+            const copyUserHunts = JSON.parse(JSON.stringify(userHunts))
+            const checkHunt = copyUserHunts.find(uh => uh.userId === newUserHunt.userId)
+            if(checkHunt) {
+                window.alert("User already selected.")
+            } else {
+                if (copyUserHunts.length > 1) {
+                    copyUserHunts.push(newUserHunt)
+                } else if (copyUserHunts[0].userId) {
+                    copyUserHunts.push(newUserHunt)
+                } else {
+                    copyUserHunts[0] = newUserHunt
+                }
+                setUserHunts(copyUserHunts)
+            }
+        } else {
+            newUserHunt = {
+                huntId: parseInt(hunt.id),
+                userId: parseInt(event.target.id.split("--")[1]),
+                stepsCompleted: 0
+            }
+            const checkHunt = userHunts.find(uh => uh.userId === newUserHunt.userId && uh.huntId === newUserHunt.huntId)
+            if(checkHunt) {
+                window.alert("User already on this hunt.")
+            } else {
+                return UserHuntRepository.sendUserHunt(newUserHunt)
+                    .then(() => UserHuntRepository.getAll())
+                    .then(setUserHunts)
+                    .then(() => {
+                        // toggleDialog()
+                        // history.push(`/hunts/${huntId}`)
+                    })
+            }
         }
         //setPurchase(copy)
-        const checkHunt = userHunts.find(uh => uh.userId === newUserHunt.userId && uh.huntId === newUserHunt.huntId)
-        if(checkHunt) {
-            window.alert("User already on this hunt.")
-        } else {
-            return UserHuntRepository.sendUserHunt(newUserHunt)
-                .then(() => UserHuntRepository.getAll())
-                .then(setUserHunts)
-                .then(() => {
-                    // toggleDialog()
-                    // history.push(`/hunts/${huntId}`)
-                })
-        }
     }
 
     return (
