@@ -47,7 +47,7 @@ export const HuntCreator = (props) => {
                         <h3>Hunters</h3>
                         <article className="hunterList">
                             {props.userHunts?.map(uh => {
-                                if (uh.huntId === props.hunt.id) {
+                                if (uh.user && uh.huntId === props.hunt.id) {
                                     return <div className="hunterStatus" key={`hunterStatus--${uh.id}`}>
                                         <div>{uh.user.name}</div>
                                         <div>Steps completed {uh.stepsCompleted}</div>

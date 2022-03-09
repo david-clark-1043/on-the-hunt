@@ -6,6 +6,9 @@ export default {
     async get(id) {
         return await fetchIt(`${Settings.remoteURL}/hunts/${id}`)
     },
+    async addHunt(hunt) {
+        return await fetchIt(`${Settings.remoteURL}/hunts`, "POST", JSON.stringify(hunt))
+    },
     async deleteHunt(id) {
         // const filteredUserHunts = await UserHuntRepository.getByHuntId(id)
         return await fetchIt(`${Settings.remoteURL}/hunts/${id}`, "DELETE")

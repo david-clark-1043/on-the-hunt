@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useHistory, useParams } from "react-router-dom"
 import checkUser from "../../hooks/checkUser"
 import ClueRepository from "../../repositories/ClueRepository"
@@ -11,7 +11,8 @@ import { HuntParticipant } from "./HuntParticipant"
 export const Hunt = () => {
     const [hunt, setHunt] = useState({})
     const [userHunts, setUserHunts] = useState([])
-    const [currentUser, setUser] = useState(0)
+    const [userHunt, setUserHunt] = useState([])
+    //const [currentUser, setUser] = useState(null)
     const [clues, setClues] = useState([])
     const history = useHistory()
     const { getCurrentUser } = checkUser()
@@ -30,32 +31,38 @@ export const Hunt = () => {
                         return ClueRepository.getCluesForHunt(huntId)
                     })
                     .then(setClues)
-                    .then(() => {
-                        return setUser(getCurrentUser())
-                    })
             }
         },
         [huntId]
     )
 
+    useEffect(
+        () => {
+            const user = getCurrentUser()
+            const foundUserHunt = userHunts.find(uh => uh.huntId == parseInt(huntId) && uh.userId == user)
+            setUserHunt(foundUserHunt)
+        }, [userHunts]
+    )
+
     return <main>
-        {currentUser === hunt.userId
+        {getCurrentUser() === hunt.userId
             ? <HuntCreator
-                hunt = { hunt }
-                userHunts = { userHunts }
-                currentUser = { currentUser }
-                clues = { clues }
-                setUserHunts = { setUserHunts }
-                setClues = { setClues }
-                setHunt = { setHunt } />
+                hunt={hunt}
+                userHunts={userHunts}
+                currentUser={getCurrentUser()}
+                clues={clues}
+                setUserHunts={setUserHunts}
+                setClues={setClues}
+                setHunt={setHunt} />
             : <HuntParticipant
-                hunt = { hunt }
-                userHunts = { userHunts }
-                currentUser = { currentUser }
-                clues = { clues }
-                setUserHunts = { setUserHunts }
-                setClues = { setClues }
-                setHunt = { setHunt } />
+                hunt={hunt}
+                userHunt={userHunt}
+                currentUser={getCurrentUser()}
+                clues={clues}
+            // setUserHunts = { setUserHunts }
+            // setClues = { setClues }
+            // setHunt = { setHunt } 
+            />
         }
         {
             // JSON.stringify(clues)

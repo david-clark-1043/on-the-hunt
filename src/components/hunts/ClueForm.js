@@ -3,7 +3,7 @@ import ClueTypeRepository from "../../repositories/ClueTypeRepository"
 
 
 export const ClueForm = ({ cluesToAdd, setCluesToAdd, editingClue, setEditing }) => {
-    const [currentClue, setCurrentClue] = useState({ clueType: 0 })
+    const [currentClue, setCurrentClue] = useState({ clueTypeId: 0 })
     const [editIndex, setEditIndex] = useState(-1)
     const [clueTypes, setClueTypes] = useState([])
 
@@ -34,7 +34,7 @@ export const ClueForm = ({ cluesToAdd, setCluesToAdd, editingClue, setEditing })
 
     const saveStep = (event) => {
         event.preventDefault()
-        if (currentClue.clueText && currentClue.clueType && currentClue.clueAnswer) {
+        if (currentClue.clueText && currentClue.clueTypeId && currentClue.clueAnswer) {
             const copyClues = JSON.parse(JSON.stringify(cluesToAdd))
             if (editIndex >= 0) {
                 copyClues[editIndex] = currentClue
@@ -50,7 +50,7 @@ export const ClueForm = ({ cluesToAdd, setCluesToAdd, editingClue, setEditing })
             }
             setCluesToAdd(copyClues)
             setEditing(!editingClue)
-            setCurrentClue({ clueType: 0 })
+            setCurrentClue({ clueTypeId: 0 })
         }
     }
 
@@ -78,9 +78,9 @@ export const ClueForm = ({ cluesToAdd, setCluesToAdd, editingClue, setEditing })
         <>
             {editingClue
                 ? <>
+                    <div className="editingClue">
+                    
                     <div>Editing Clue</div>
-                    <form>
-
                         <fieldset>
                             <div className="clueText">
                                 <label htmlFor="clueText">Clue Hint: </label>
@@ -103,17 +103,17 @@ export const ClueForm = ({ cluesToAdd, setCluesToAdd, editingClue, setEditing })
                                             <input type="radio"
                                                 key={`type--${type.id}`}
                                                 name="clueType"
-                                                id="clueType"
+                                                id="clueTypeId"
                                                 value={`${type.id}`}
                                                 onChange={(e) => handleClueInput(e, true)}
-                                                checked={currentClue.clueType === type.id} />
+                                                checked={currentClue.clueTypeId === type.id} />
                                             {type.type}
                                         </div>
                                     })
                                 }
                             </div>
                         </fieldset>
-                        {currentClue.clueType
+                        {currentClue.clueTypeId
                             ? <fieldset>
                                 <label htmlFor="clueAnswer">Clue Answer: </label>
                                 <input
@@ -137,7 +137,7 @@ export const ClueForm = ({ cluesToAdd, setCluesToAdd, editingClue, setEditing })
                                 Back
                             </button>
                         </div>
-                    </form>
+                    </div>
                 </>
                 : <>
                     <h2>Clues</h2>

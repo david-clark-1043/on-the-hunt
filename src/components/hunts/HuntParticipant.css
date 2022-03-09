@@ -1,29 +1,22 @@
-/* .newHuntForm {
+.clueContainer {
     margin: 1em;
-    padding: 1em;
-} */
-.clueList {
-    border: 1px dashed blue;
-    padding: 1em;
-}
-
-.creatHunt {
-    margin: 1em;
-    padding: 1em;
     padding: 1em;
     border: 1px dashed blue;
 }
 
-.hunters {
-    padding: 1em;
-}
-
-.createHuntButtons {
-    display: flex;
-}
-
-.editingClue {
-    border: 1px dashed blue;
+.currentStepBox {
     margin: 1em;
-    padding: .5em;
+    padding: 1em;
+    border: 1px dashed blue;
+}
+
+.compeletedStepsBox {
+    margin: 1em;
+    padding: 1em;
+    border: 1px dashed blue;
+}
+.completedClueListing{
+    margin: 1em;
+    padding: 1em;
+    border: 1px dashed blue;
 }
