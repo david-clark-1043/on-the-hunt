@@ -9,9 +9,14 @@ export const HuntParticipant = (props) => {
 
     useEffect(
         () => {
-            const stepIndex = props.userHunt?.stepsCompleted
+            let stepIndex = props.userHunt?.stepsCompleted
+            let sliceIndex = stepIndex
+            if (stepIndex > props.clues.length - 1) {
+                stepIndex = props.clues.length - 1
+                sliceIndex = stepIndex + 1
+            }
             const clue = props.clues[stepIndex]
-            const completes = props.clues.slice(0, stepIndex)
+            const completes = props.clues.slice(0, sliceIndex)
             setCompletedClues(completes)
             setCurrentclue(clue)
         }, [props.userHunt, props.clues]
@@ -22,8 +27,8 @@ export const HuntParticipant = (props) => {
             <div className="clueBox">
                 <div>
                     <div>
-                    <h2>Scavenger Hunt: {props.hunt.title}</h2>
-                    <button onClick={() => history.goBack()}>Back</button>
+                        <h2>Scavenger Hunt: {props.hunt.title}</h2>
+                        <button onClick={() => history.goBack()}>Back</button>
                     </div>
                     <div className="currentStepBox">
                         {
@@ -33,7 +38,7 @@ export const HuntParticipant = (props) => {
                                     <div>{props.hunt.rewardText}</div>
                                 </div>
                                 : <div>
-                                    <h3 className="currentStepTitle">Clue {currentClue?.clueIndex} of {props.clues.length}</h3>
+                                    <h3 className="currentStepTitle">Clue {props.clues?.findIndex(clue => clue.id === currentClue?.id) + 1} of {props.clues.length}</h3>
                                     <div className="currentClueType">
                                         Category: {currentClue?.clueType?.type} Clue
                                     </div>
@@ -47,12 +52,12 @@ export const HuntParticipant = (props) => {
                     <div className="compeletedStepsBox">
                         <h3>Completed Clues</h3>
                         {
-                            completedClues.map(compClue => {
-                                return <div className="completedClueListing">
-                                    <div>Clue {compClue.clueIndex}</div>
+                            completedClues.map((compClue, index) => {
+                                return <div className="completedClueListing" key={`completedClue--${compClue.id}`}>
+                                    <div>Clue {index + 1}</div>
                                     <div>{compClue.clueText}</div>
                                     <div>{compClue.clueAnswer}</div>
-                                    </div>
+                                </div>
                             })
                         }
                     </div>

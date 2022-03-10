@@ -4,8 +4,8 @@ import checkUser from "../../hooks/checkUser"
 import ClueRepository from "../../repositories/ClueRepository"
 import HuntRepository from "../../repositories/HuntRepository"
 import UserHuntRepository from "../../repositories/UserHuntRepository"
-import { HuntCreator } from "./HuntCreator"
-import { HuntParticipant } from "./HuntParticipant"
+import { HuntCreator } from "../huntCreator/HuntCreator"
+import { HuntParticipant } from "../huntParticipant/HuntParticipant"
 
 
 export const Hunt = () => {
@@ -60,7 +60,7 @@ export const Hunt = () => {
                 currentUser={getCurrentUser()}
                 clues={clues}
             // setUserHunts = { setUserHunts }
-            // setClues = { setClues }
+                setClues = { setClues }
             // setHunt = { setHunt } 
             />
         }

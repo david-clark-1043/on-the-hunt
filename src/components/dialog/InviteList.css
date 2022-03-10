@@ -4,6 +4,7 @@
 
 .userListing {
     display: flex;
+    justify-content: space-between;
     text-align: left;
     background-color: aliceblue;
     border-radius: 1em;

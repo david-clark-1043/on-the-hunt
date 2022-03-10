@@ -6,7 +6,7 @@ import HuntRepository from "../../repositories/HuntRepository";
 import UserHuntRepository from "../../repositories/UserHuntRepository";
 import UserRepository from "../../repositories/UserRepository";
 import { HunterInvite } from "../dialog/HunterInvite"
-import { ClueForm } from "./ClueForm"
+import { ClueForm } from "../clueForm/ClueForm"
 import "./CreateHunt.css";
 
 export const CreateHunt = () => {
@@ -30,6 +30,18 @@ export const CreateHunt = () => {
         const property = event.target.id
         copy[property] = event.target.value
         setNewHunt(copy)
+    }
+
+    const uninviteHunter = (event) => {
+        const copy = userHuntsToAdd.map(userHunt => ({...userHunt}))
+        const deletedArray = copy.filter(element => element.userId != parseInt(event.target.id))
+        if(!(typeof deletedArray[0] === 'object')){
+            setUserHuntsToAdd([{ userId: 0 }])
+        } else {
+            setUserHuntsToAdd(deletedArray)
+        }
+        
+
     }
 
     const saveHunt = () => {
@@ -126,9 +138,12 @@ export const CreateHunt = () => {
                 <div className="inviteeList">
                     {
                         users.map(user => {
-                            const foundUser = userHuntsToAdd.find(uh => uh.userId === user.id)
-                            if (foundUser) {
-                                return <div>{user.name}</div>
+                            const foundUserHunt = userHuntsToAdd.find(uh => uh.userId === user.id)
+                            if (foundUserHunt) {
+                                return <div className="invitedHunter" key={`invitee--${foundUserHunt.userId}`}>
+                                    <div>{user.name}</div>
+                                    <button className="deleteInvite" id={`${foundUserHunt.userId}`}onClick={uninviteHunter}>Uninvite</button>
+                                    </div>
                             }
                         })
                     }

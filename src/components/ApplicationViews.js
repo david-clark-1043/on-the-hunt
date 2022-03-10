@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { CreateHunt } from "./hunts/CreateHunt";
+import { CreateHunt } from "./createHunts/CreateHunt";
 import { Hunt } from "./hunts/Hunt";
 import { HunterProgress } from "./hunts/HunterProgress";
 import { MyHunts } from "./hunts/MyHunts";

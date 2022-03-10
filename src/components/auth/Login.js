@@ -22,7 +22,7 @@ export const Login = () => {
                     localStorage.setItem("hunt_customer", exists.id)
                     history.push("/home")
                 } else {
-                    existDialog.current.showModal()
+                    //existDialog.current.showModal()
                 }
             })
     }

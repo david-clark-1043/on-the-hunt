@@ -34,7 +34,7 @@ export const Register = (props) => {
                         })
                 }
                 else {
-                    conflictDialog.current.showModal()
+                    //conflictDialog.current.showModal()
                 }
             })
     }

@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react"
 import { useHistory, useLocation, useParams } from "react-router-dom"
+import ClueRepository from "../../repositories/ClueRepository"
 import UserHuntRepository from "../../repositories/UserHuntRepository"
 
 export const HunterProgress = () => {
-    const { clues, hunt } = useLocation().state
+    const {  hunt } = useLocation().state
     const [userHunt, setUserHunt] = useState({ stepsCompleted: 0 })
     const [currentClue, setClue] = useState({})
     const { huntId, userId } = useParams()
     const history = useHistory()
+    const [clues, setClues] = useState([])
+    useEffect(
+        () => {
+
+        }, []
+    )
 
     useEffect(
         () => {
@@ -18,11 +25,20 @@ export const HunterProgress = () => {
                     })
                     if (foundUH) {
                         setUserHunt(foundUH)
-                        setClue(clues[foundUH.stepsCompleted])
                     }
                 })
+                .then(() => {
+                    return ClueRepository.getCluesForHunt(huntId)
+                })
+                .then(setClues)
         }
         , [huntId, userId]
+    )
+
+    useEffect(
+        () => {
+            setClue(clues[userHunt.stepsCompleted])
+        }, [userHunt, clues]
     )
 
     const unlockClue = () => {
@@ -48,16 +64,16 @@ export const HunterProgress = () => {
         <button className="backButton" onClick={() => history.goBack()}>Back</button>
         <h3 className="hunterName">Hunter: {userHunt.user?.name}</h3>
         <div>
-            {clues.length > userHunt.stepsCompleted
+            {clues?.length > userHunt?.stepsCompleted
                 ? <div className="currentStep">
                     <div className="stepNum">
-                        Current Clue: {currentClue.clueIndex}
+                        Current Clue: {clues?.findIndex(clue => clue.id === currentClue?.id) + 1}
                     </div>
                     <div className="clueText">
-                        Hint: {currentClue.clueText}
+                        Hint: {currentClue?.clueText}
                     </div>
                     <div className="clueAnswer">
-                        Answer: {currentClue.clueAnswer}
+                        Answer: {currentClue?.clueAnswer}
                     </div>
                     <button className="unlockClue" onClick={unlockClue}>
                         Unlock Next Clue
@@ -66,8 +82,8 @@ export const HunterProgress = () => {
                 : <div>
                     <div>Hunt Complete!</div>
                     <div>
-                        {clues.map(clue => <div>
-                            <div>Clue {clue.clueIndex}</div>
+                        {clues.map((clue, index) => <div key={`clue--${clue.id}`}>
+                            <div>Clue {index + 1}</div>
                             <div>Hint: {clue.clueText}</div>
                             <div>Solution: {clue.clueAnswer}</div>
                         </div>)}
