@@ -1,5 +1,5 @@
 
-export const ClueEditing = ({ currentClue, handleClueInput, clueTypes, editingClue, setEditing, saveStep }) => {
+export const ClueEditing = ({ currentClue,setCurrentClue, handleClueInput, clueTypes, editingClue, setEditing, saveStep }) => {
     // currentClue - state object
     // handleClueInput - function
     // clueTypes - state value
@@ -62,6 +62,7 @@ export const ClueEditing = ({ currentClue, handleClueInput, clueTypes, editingCl
                     onClick={(e) => {
                         e.preventDefault()
                         setEditing(!editingClue)
+                        setCurrentClue({ clueTypeId: 0 })
                     }
                     }>
                     Back
