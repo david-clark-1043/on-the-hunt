@@ -45,9 +45,6 @@ export const ClueEditing = ({ currentClue, handleClueInput, clueTypes, editingCl
             </fieldset>
             {currentClue.clueTypeId
                 ? <fieldset>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12885.036487921765!2d-86.77783575009765!3d36.160248600798184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1646862688257!5m2!1sen!2sus" 
-                    width="400" height="300" style={{border: 0}} allowFullScreen="" loading="lazy">
-                        </iframe><br/>
                     <label htmlFor="clueAnswer">Clue Answer: </label>
                     <input
                         required autoFocus

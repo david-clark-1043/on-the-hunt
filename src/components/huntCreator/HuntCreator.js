@@ -32,13 +32,12 @@ export const HuntCreator = (props) => {
     )
 
     const handleClueInput = (event, parse = false) => {
-        event.preventDefault()
-        debugger
         const copy = JSON.parse(JSON.stringify(currentClue))
         const property = event.target.id
         if (parse) {
             copy[property] = parseInt(event.target.value)
         } else {
+            event.preventDefault()
             copy[property] = event.target.value
         }
         setCurrentClue(copy)
