@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import checkUser from "../../hooks/checkUser";
 import HuntRepository from "../../repositories/HuntRepository";
 import UserHuntRepository from "../../repositories/UserHuntRepository";
+import { MapComponent } from "../MapComponent/MapComponent";
 import "./MyHunt.css";
 
 export const MyHunts = () => {
@@ -76,6 +77,7 @@ export const MyHunts = () => {
             <main className="mainContainer">
                 <div className="hunts">
                     <h2>Your Hunts</h2>
+                    <MapComponent />
                     <article className="huntList">
                         <div className="huntmaster">
                             <h3>Huntmaster for:</h3>
