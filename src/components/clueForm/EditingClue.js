@@ -13,7 +13,7 @@ export const ClueEditing = ({ currentClue, handleClueInput, clueTypes, editingCl
     // editingClue - state value
     // setEditing - state function
 
-    const API_KEY = Settings.API_KEY
+    const MAPS_API_KEY = Settings.API_KEY
     const [center, setCenter] = useState({ lat: 36.12961419432934, lng: -86.83921234262075 });
     const [click, setClick] = useState(currentClue.lat ? {lat: currentClue.lat, lng: currentClue.lng} : { lat: 36.12961419432934, lng: -86.83921234262075 });
     const [zoom, setZoom] = useState(10); // initial zoom
@@ -111,7 +111,7 @@ export const ClueEditing = ({ currentClue, handleClueInput, clueTypes, editingCl
             {currentClue.clueTypeId
                 ? currentClue.clueTypeId === 1
                     ? <>
-                        <Wrapper apiKey={`${process.env.MAPS_API_KEY}`} render={render} />
+                        <Wrapper apiKey={MAPS_API_KEY} render={render} />
                         <fieldset>
                             <label htmlFor="clueAnswer">Clue Answer: </label>
                             <input
