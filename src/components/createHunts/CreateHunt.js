@@ -75,9 +75,11 @@ export const CreateHunt = () => {
                     })
                 })
                 .then(cluesWithData => {
+                    const arr = []
                     for (const clue of cluesWithData) {
-                        ClueRepository.addClue(clue)
+                        arr.push(ClueRepository.addClue(clue))
                     }
+                    return Promise.all(arr)
                 })
                 .then(() => {
                     return userHuntsToAdd.map(uh => {
@@ -87,9 +89,11 @@ export const CreateHunt = () => {
                     })
                 })
                 .then(userHuntsWithData => {
+                    const arr = []
                     for (const userHunt of userHuntsWithData) {
-                        UserHuntRepository.sendUserHunt(userHunt)
+                        arr.push(UserHuntRepository.sendUserHunt(userHunt))
                     }
+                    return Promise.all(arr)
                 })
                 .then(() => {
                     history.push("/home")

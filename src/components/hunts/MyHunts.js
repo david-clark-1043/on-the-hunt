@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import checkUser from "../../hooks/checkUser";
 import HuntRepository from "../../repositories/HuntRepository";
 import UserHuntRepository from "../../repositories/UserHuntRepository";
@@ -45,18 +45,18 @@ export const MyHunts = () => {
                         return (
                             <div key={hunt.hunt?.id ? `hunter--${hunt.hunt.id}` : `huntmaster--${hunt.id}`}>
                                 {hunt.hunt
-                                        ? <button
-                                            className="huntTitle"
-                                            id={`${hunt.hunt.id}`}
-                                            onClick={huntNavigate}>
-                                            {hunt.hunt.title}
-                                        </button>
-                                        : <button
-                                            className="huntTitle"
-                                            id={`${hunt.id}`}
-                                            onClick={huntNavigate}>
-                                            {hunt.title}
-                                        </button>
+                                    ? <button
+                                        className="huntTitle"
+                                        id={`${hunt.hunt.id}`}
+                                        onClick={huntNavigate}>
+                                        {hunt.hunt.title}
+                                    </button>
+                                    : <button
+                                        className="huntTitle"
+                                        id={`${hunt.id}`}
+                                        onClick={huntNavigate}>
+                                        {hunt.title}
+                                    </button>
                                 }
                             </div>
 
@@ -93,7 +93,7 @@ export const MyHunts = () => {
                     </article>
                 </div>
                 {/* <button className="newHuntButton" onClick={newHuntNavigate}>New Hunt</button> */}
-            </main>
+            </main >
         </>
     )
 }

@@ -85,7 +85,7 @@ export const HunterProgress = () => {
                         {clues.map((clue, index) => <div key={`clue--${clue.id}`}>
                             <div>Clue {index + 1}</div>
                             <div>Hint: {clue.clueText}</div>
-                            <div>Solution: {clue.clueAnswer}</div>
+                            <div>Answer: {clue.clueAnswer}</div>
                         </div>)}
                     </div>
                 </div>

@@ -38,7 +38,15 @@ export const ClueForm = ({ cluesToAdd, setCluesToAdd, editingClue, setEditing })
 
     const saveStep = (event) => {
         event.preventDefault()
-        if (currentClue.clueText && currentClue.clueTypeId && currentClue.clueAnswer) {
+        let clueAnswerCheck = false
+        if(currentClue.clueTypeId && currentClue.clueTypeId === 2) {
+            clueAnswerCheck = true
+        } else if (currentClue.clueTypeId && currentClue.lat) {
+            clueAnswerCheck = true
+        }
+        if (currentClue.clueText && 
+            currentClue.clueTypeId && 
+            clueAnswerCheck) {
             const copyClues = JSON.parse(JSON.stringify(cluesToAdd))
             if (editIndex >= 0) {
                 copyClues[editIndex] = currentClue
@@ -55,6 +63,8 @@ export const ClueForm = ({ cluesToAdd, setCluesToAdd, editingClue, setEditing })
             setCluesToAdd(copyClues)
             setEditing(!editingClue)
             setCurrentClue({ clueTypeId: 0 })
+        } else {
+            window.alert("clue info error")
         }
     }
 

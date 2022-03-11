@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
+import UserHuntRepository from "../../repositories/UserHuntRepository"
 import "./HuntParticipant.css"
 
 export const HuntParticipant = (props) => {
@@ -21,6 +22,60 @@ export const HuntParticipant = (props) => {
             setCurrentclue(clue)
         }, [props.userHunt, props.clues]
     )
+
+    const error = () => {
+        window.alert("Unable to get your location.")
+    }
+
+    const success = (position) => {
+        /*
+            at lat 36 degrees
+            1 lat is ~ 362775.7596463947 ft
+            1ft = 1 / 362775.7596463947
+            want to be within 500ft radius of solution
+            = 0.00137826187859784431313755449841 degrees
+             36.1271556323669
+        */
+        // get clue answer from state
+        // get lat and long from clue answer
+        const clueLat = currentClue.lat
+        const clueLng = currentClue.lng
+
+        console.log(`clue lat: ${clueLat} - clue lng: ${clueLng}`)
+        // calc distance from person to target
+        const personLat = position.coords.latitude
+        const personLng = position.coords.longitude
+        console.log(`person lat: ${personLat} - person lng: ${personLng}`)
+        // if less than 500ft
+        const maxDistance = 0.0013782618785
+
+        const distance = Math.sqrt(((clueLat - personLat) ** 2) + ((clueLng - personLng) ** 2))
+        console.log(`max distance ${maxDistance} -- distance ${distance}`)
+        if (distance < maxDistance) {
+            const copy = JSON.parse(JSON.stringify(props.userHunt))
+            delete copy.user
+            delete copy.hunt
+            copy.stepsCompleted++
+            UserHuntRepository.updateUserHunt(copy)
+                .then(() => {
+                    return UserHuntRepository.getAll()
+                })
+                .then(props.setUserHunts)
+        } else {
+            window.alert("Too far from goal")
+        }
+    }
+
+    const checkLocation = (event) => {
+
+        // get person lat and long from browser
+        if (!navigator.geolocation) {
+            window.alert('Geolocation is not supported by your browser')
+        } else {
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
+
+    }
 
     return <>
         <main className="clueContainer">
@@ -45,6 +100,15 @@ export const HuntParticipant = (props) => {
                                     <div className="currentClueText">
                                         {currentClue?.clueText}
                                     </div>
+                                    <div>
+                                        {
+                                            currentClue?.clueType?.type === "Location"
+                                                ? <div>
+                                                    <button onClick={checkLocation}>Check Location</button>
+                                                </div>
+                                                : null
+                                        }
+                                    </div>
 
                                 </div>
                         }
@@ -55,8 +119,8 @@ export const HuntParticipant = (props) => {
                             completedClues.map((compClue, index) => {
                                 return <div className="completedClueListing" key={`completedClue--${compClue.id}`}>
                                     <div>Clue {index + 1}</div>
-                                    <div>{compClue.clueText}</div>
-                                    <div>{compClue.clueAnswer}</div>
+                                    <div>Hint: {compClue.clueText}</div>
+                                    <div>Answer: {compClue.clueAnswer}</div>
                                 </div>
                             })
                         }
