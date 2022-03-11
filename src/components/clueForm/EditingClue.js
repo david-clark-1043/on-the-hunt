@@ -2,6 +2,7 @@
 
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { useEffect, useState } from "react";
+import Settings from "../../repositories/Settings";
 import { MapComponent } from "../MapComponent/MapComponent";
 import { Marker } from "../MapComponent/MarkerComponent";
 
@@ -12,15 +13,25 @@ export const ClueEditing = ({ currentClue, handleClueInput, clueTypes, editingCl
     // editingClue - state value
     // setEditing - state function
 
-    const API_KEY = ""
+    const API_KEY = Settings.API_KEY
     const [center, setCenter] = useState({ lat: 36.12961419432934, lng: -86.83921234262075 });
-    const [click, setClick] = useState();
+    const [click, setClick] = useState(currentClue.lat ? {lat: currentClue.lat, lng: currentClue.lng} : { lat: 36.12961419432934, lng: -86.83921234262075 });
     const [zoom, setZoom] = useState(10); // initial zoom
     const [position, SetPosition] = useState()
 
     useEffect(
         () => {
-            if (click) {
+            if(currentClue.lat) {
+                const copyClick = JSON.parse(JSON.stringify(click))
+                copyClick.lat = currentClue.lat
+                copyClick.lng = currentClue.lng
+            }
+        }, [currentClue]
+    )
+
+    useEffect(
+        () => {
+            if (typeof click.lat === "function") {
                 const lat = click.lat()
                 const lng = click.lng()
                 const copy = JSON.parse(JSON.stringify(currentClue))

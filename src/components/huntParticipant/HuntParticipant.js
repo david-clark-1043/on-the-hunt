@@ -53,6 +53,8 @@ export const HuntParticipant = (props) => {
         console.log(`max distance ${maxDistance} -- distance ${distance}`)
         if (distance < maxDistance) {
             const copy = JSON.parse(JSON.stringify(props.userHunt))
+            delete copy.user
+            delete copy.hunt
             copy.stepsCompleted++
             UserHuntRepository.updateUserHunt(copy)
                 .then(() => {
