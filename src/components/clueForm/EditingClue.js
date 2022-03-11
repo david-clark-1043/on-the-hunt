@@ -111,7 +111,7 @@ export const ClueEditing = ({ currentClue, handleClueInput, clueTypes, editingCl
             {currentClue.clueTypeId
                 ? currentClue.clueTypeId === 1
                     ? <>
-                        <Wrapper apiKey={process.env.MAPS_API_KEY} render={render} />
+                        <Wrapper apiKey={`${process.env.MAPS_API_KEY}`} render={render} />
                         <fieldset>
                             <label htmlFor="clueAnswer">Clue Answer: </label>
                             <input
