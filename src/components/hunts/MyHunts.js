@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import checkUser from "../../hooks/checkUser";
 import HuntRepository from "../../repositories/HuntRepository";
 import UserHuntRepository from "../../repositories/UserHuntRepository";
-import { MapComponent } from "../MapComponent/MapComponent";
 import "./MyHunt.css";
 
 export const MyHunts = () => {
@@ -46,18 +45,18 @@ export const MyHunts = () => {
                         return (
                             <div key={hunt.hunt?.id ? `hunter--${hunt.hunt.id}` : `huntmaster--${hunt.id}`}>
                                 {hunt.hunt
-                                        ? <button
-                                            className="huntTitle"
-                                            id={`${hunt.hunt.id}`}
-                                            onClick={huntNavigate}>
-                                            {hunt.hunt.title}
-                                        </button>
-                                        : <button
-                                            className="huntTitle"
-                                            id={`${hunt.id}`}
-                                            onClick={huntNavigate}>
-                                            {hunt.title}
-                                        </button>
+                                    ? <button
+                                        className="huntTitle"
+                                        id={`${hunt.hunt.id}`}
+                                        onClick={huntNavigate}>
+                                        {hunt.hunt.title}
+                                    </button>
+                                    : <button
+                                        className="huntTitle"
+                                        id={`${hunt.id}`}
+                                        onClick={huntNavigate}>
+                                        {hunt.title}
+                                    </button>
                                 }
                             </div>
 
@@ -77,7 +76,6 @@ export const MyHunts = () => {
             <main className="mainContainer">
                 <div className="hunts">
                     <h2>Your Hunts</h2>
-                    <MapComponent />
                     <article className="huntList">
                         <div className="huntmaster">
                             <h3>Huntmaster for:</h3>
@@ -95,7 +93,7 @@ export const MyHunts = () => {
                     </article>
                 </div>
                 {/* <button className="newHuntButton" onClick={newHuntNavigate}>New Hunt</button> */}
-            </main>
+            </main >
         </>
     )
 }

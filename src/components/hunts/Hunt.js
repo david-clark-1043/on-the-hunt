@@ -59,7 +59,7 @@ export const Hunt = () => {
                 userHunt={userHunt}
                 currentUser={getCurrentUser()}
                 clues={clues}
-            // setUserHunts = { setUserHunts }
+                setUserHunts = { setUserHunts }
                 setClues = { setClues }
             // setHunt = { setHunt } 
             />
