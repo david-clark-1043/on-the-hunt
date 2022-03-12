@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react"
 import { Link } from "react-router-dom";
+import Settings from "../../repositories/Settings";
 import { useHistory } from "react-router-dom"
 import "./Login.css"
 
@@ -9,7 +10,7 @@ export const Login = () => {
     const history = useHistory()
 
     const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/users?email=${email}`)
+        return fetch(`${Settings.remoteURL}/users?email=${email}`)
             .then(res => res.json())
             .then(user => user.length ? user[0] : false)
     }
