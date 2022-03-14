@@ -11,8 +11,8 @@ import ClueRepository from "../../repositories/ClueRepository";
 export const HuntCreator = (props) => {
     const [editingClue, setEditing] = useState(false)
     const [currentClue, setCurrentClue] = useState({})
+    const [deleteModal, toggleDeleteModal] = useState(false)
     const history = useHistory()
-    const { toggleDialog: toggleDeleteDialog, modalIsOpen: deleteIsOpen } = useModal("#dialog--delete")
 
     const [clueTypes, setClueTypes] = useState([])
 
@@ -136,8 +136,8 @@ export const HuntCreator = (props) => {
                     </div>
                     <div>
                         <HunterInvite hunt={props.hunt} userHunts={props.userHunts} setUserHunts={props.setUserHunts} />
-                        <ConfirmDelete toggleDeleteDialog={toggleDeleteDialog} hunt={props.hunt} />
-                        <button onClick={toggleDeleteDialog}>Delete Hunt</button>
+                        <ConfirmDelete modal={deleteModal} setModal={toggleDeleteModal} hunt={props.hunt} />
+                        <button onClick={() => toggleDeleteModal(true)}>Delete Hunt</button>
                     </div>
 
                 </div>
