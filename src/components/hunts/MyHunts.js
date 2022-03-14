@@ -94,7 +94,7 @@ export const MyHunts = () => {
                 </div>
                 {/* <button className="newHuntButton" onClick={newHuntNavigate}>New Hunt</button> */}
             </main >
-            {`${JSON.stringify(process.env)}`}
+            {/* {`${JSON.stringify(process.env)}`} */}
         </>
     )
 }
