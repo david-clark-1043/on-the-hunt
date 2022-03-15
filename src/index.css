@@ -26,11 +26,11 @@ button {
   box-shadow: 2px 2px;
 }
 
-dialog {
+/* dialog {
   border: 1px dashed black;
   background-color: rgb(253, 221, 170);
   border-radius: 1em;
-}
+} */
 
 button:active {
   background-color: rgb(201, 152, 87);
