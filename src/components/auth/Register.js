@@ -6,7 +6,7 @@ import "./Login.css"
 
 export const Register = (props) => {
     const [customer, setCustomer] = useState({})
-    const [conflictDialog, setConflictDialog] = useState()
+    const [conflictDialog, setConflictDialog] = useState(false)
 
     const history = useHistory()
 
@@ -31,6 +31,7 @@ export const Register = (props) => {
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
                                 localStorage.setItem("hunt_customer", createdUser.id)
+                                setConflictDialog(false)
                                 history.push("/home")
                             }
                         })
@@ -69,10 +70,6 @@ export const Register = (props) => {
                     <input onChange={updateCustomer}
                            type="text" id="name" className="form-control"
                            placeholder="Enter your name" required autoFocus />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="address"> Address </label>
-                    <input onChange={updateCustomer} type="text" id="address" className="form-control" placeholder="Street address" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="email"> Email address </label>

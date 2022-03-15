@@ -22,6 +22,7 @@ export const Login = () => {
             .then(exists => {
                 if (exists) {
                     localStorage.setItem("hunt_customer", exists.id)
+                    setExistDialog(false)
                     history.push("/home")
                 } else {
                     setExistDialog(true)

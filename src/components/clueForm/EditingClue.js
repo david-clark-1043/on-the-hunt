@@ -113,17 +113,20 @@ export const ClueEditing = ({ currentClue, handleClueInput, clueTypes, editingCl
                     ? <>
                         <Wrapper apiKey={MAPS_API_KEY} render={render} />
                         <fieldset>
-                            <label htmlFor="clueAnswer">Clue Answer: </label>
-                            <input
-                                required autoFocus
-                                type="text"
-                                id="clueAnswer"
-                                className="form-control"
-                                defaultValue={currentClue.clueAnswer}
-                                onChange={handleClueInput} />
+                            <div className="form-group">
+                                <label htmlFor="clueAnswer">Clue Answer: </label>
+                                <input
+                                    required autoFocus
+                                    type="text"
+                                    id="clueAnswer"
+                                    className="form-control"
+                                    defaultValue={currentClue.clueAnswer}
+                                    onChange={handleClueInput} />
+                            </div>
                         </fieldset>
                     </>
                     : <fieldset>
+                        <div className="form-group">
                         <label htmlFor="clueAnswer">Clue Answer: </label>
                         <input
                             required autoFocus
@@ -132,6 +135,8 @@ export const ClueEditing = ({ currentClue, handleClueInput, clueTypes, editingCl
                             className="form-control"
                             defaultValue={currentClue.clueAnswer}
                             onChange={handleClueInput} />
+
+                        </div>
                     </fieldset>
                 : null
             }
