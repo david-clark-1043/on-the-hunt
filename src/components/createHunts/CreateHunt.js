@@ -51,7 +51,7 @@ export const CreateHunt = () => {
         // clue has hint // clue has answer // clue has type
         const clueCheck = cluesToAdd.reduce((returnValue, currentClue) => {
             const clueReduceCheck = currentClue.clueAnswer && currentClue.clueText && currentClue.clueTypeId
-            if(!clueReduceCheck || returnValue === false) {
+            if (!clueReduceCheck || returnValue === false) {
                 return false
             } else {
                 return true
@@ -98,8 +98,8 @@ export const CreateHunt = () => {
                     })
                 })
                 .then(userHuntsWithData => {
-                    if(userHuntsWithData.length === 1 && userHuntsWithData[0].userId === 0) {
-                        
+                    if (userHuntsWithData.length === 1 && userHuntsWithData[0].userId === 0) {
+
                     } else {
                         const arr = []
                         for (const userHunt of userHuntsWithData) {
@@ -121,8 +121,10 @@ export const CreateHunt = () => {
 
     return <>
         <main className="createHunt">
-
-            <h2>Create New Hunt</h2>
+            <div className="header">
+                <div><h2>Create New Hunt</h2></div>
+                <button onClick={() => history.push("/home")}>Cancel</button>
+            </div>
             <form className="newHuntForm">
                 <fieldset>
                     <div className="form-group">

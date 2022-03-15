@@ -6,7 +6,7 @@ export default {
         return await fetchIt(`${Settings.remoteURL}/clues/${id}`)
     },
     async getCluesForHunt(huntId) {
-        return await fetchIt(`${Settings.remoteURL}/clues?huntId=${huntId}&_expand=clueType`)
+        return await fetchIt(`${Settings.remoteURL}/clues?huntId=${huntId}&_sort=clueIndex&_expand=clueType`)
     },
     async updateClue(clue) {
         return await fetchIt(`${Settings.remoteURL}/clues/${clue.id}`, "PUT", JSON.stringify(clue))

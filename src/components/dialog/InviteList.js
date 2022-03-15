@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
+import checkUser from "../../hooks/checkUser"
 import UserHuntRepository from "../../repositories/UserHuntRepository"
 import UserRepository from "../../repositories/UserRepository"
 import "./InviteList.css"
@@ -8,6 +9,7 @@ export const InviteList = ({ toggleDialog, searchInput, hunt, userHunts, setUser
     const [users, setUsers] = useState([])
     const [filteredUsers, setFilteredUsers] = useState([])
     const history = useHistory()
+    const { getCurrentUser } = checkUser()
 
     useEffect(
         () => {
@@ -37,41 +39,53 @@ export const InviteList = ({ toggleDialog, searchInput, hunt, userHunts, setUser
     const selectUser = (event) => {
         let newUserHunt = {}
         if (hunt.id === -1) {
-            newUserHunt = {
-                userId: parseInt(event.target.id.split("--")[1]),
-                stepsCompleted: 0
-            }
-            const copyUserHunts = JSON.parse(JSON.stringify(userHunts))
-            const checkHunt = copyUserHunts.find(uh => uh.userId === newUserHunt.userId)
-            if (checkHunt) {
-                window.alert("User already selected.")
-            } else {
-                if (copyUserHunts.length > 1) {
-                    copyUserHunts.push(newUserHunt)
-                } else if (copyUserHunts[0].userId) {
-                    copyUserHunts.push(newUserHunt)
-                } else {
-                    copyUserHunts[0] = newUserHunt
+            const idToAdd = parseInt(event.target.id.split("--")[1])
+            const checkId = idToAdd != getCurrentUser()
+            if(checkId) {
+                newUserHunt = {
+                    userId: idToAdd,
+                    stepsCompleted: 0
                 }
-                setUserHunts(copyUserHunts)
+                const copyUserHunts = JSON.parse(JSON.stringify(userHunts))
+                const checkHunt = copyUserHunts.find(uh => uh.userId === newUserHunt.userId)
+                if (checkHunt) {
+                    window.alert("User already selected.")
+                } else {
+                    if (copyUserHunts.length > 1) {
+                        copyUserHunts.push(newUserHunt)
+                    } else if (copyUserHunts[0].userId) {
+                        copyUserHunts.push(newUserHunt)
+                    } else {
+                        copyUserHunts[0] = newUserHunt
+                    }
+                    setUserHunts(copyUserHunts)
+                }
+            } else {
+                window.alert("You know all the answers; You can't add yourself!")
             }
         } else {
-            newUserHunt = {
-                huntId: parseInt(hunt.id),
-                userId: parseInt(event.target.id.split("--")[1]),
-                stepsCompleted: 0
-            }
-            const checkHunt = userHunts.find(uh => uh.userId === newUserHunt.userId && uh.huntId === newUserHunt.huntId)
-            if (checkHunt) {
-                window.alert("User already on this hunt.")
+            const idToAdd = parseInt(event.target.id.split("--")[1])
+            const checkId = idToAdd != getCurrentUser()
+            if(checkId) {
+                newUserHunt = {
+                    huntId: parseInt(hunt.id),
+                    userId: idToAdd,
+                    stepsCompleted: 0
+                }
+                const checkHunt = userHunts.find(uh => uh.userId === newUserHunt.userId && uh.huntId === newUserHunt.huntId)
+                if (checkHunt) {
+                    window.alert("User already on this hunt.")
+                } else {
+                    return UserHuntRepository.sendUserHunt(newUserHunt)
+                        .then(() => UserHuntRepository.getAll())
+                        .then(setUserHunts)
+                        .then(() => {
+                            // toggleDialog()
+                            // history.push(`/hunts/${huntId}`)
+                        })
+                }
             } else {
-                return UserHuntRepository.sendUserHunt(newUserHunt)
-                    .then(() => UserHuntRepository.getAll())
-                    .then(setUserHunts)
-                    .then(() => {
-                        // toggleDialog()
-                        // history.push(`/hunts/${huntId}`)
-                    })
+                window.alert("You know all the answers; You can't add yourself!")
             }
         }
         //setPurchase(copy)

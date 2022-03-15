@@ -16,7 +16,12 @@ export const OnTheHunt = () => {
                     if (localStorage.getItem("hunt_customer")) {
                         return (
                             <> 
+                                <div className="pageHeader">
+                                <div>
+                                    <img className="mapImg" src="/android-chrome-512x512.png"/>
+                                    </div>
                                 <h1>On the Hunt</h1>
+                                </div>
                                 <NavBar />
                                 <ApplicationViews />
                                 <Footer />

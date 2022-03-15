@@ -3,7 +3,7 @@
     padding: 1em;
     border: dashed black 1px;
     border-radius: 1em;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .navbar__item {
@@ -13,8 +13,9 @@
     border-radius: 1em;
 }
 
-@media screen and (min-width:1000px) {
+@media screen and (max-width:700px) {
     .navBar {
-        padding: 0 5em;
+        justify-content: space-between;
+        padding: 1em .1em;
     }
 }
