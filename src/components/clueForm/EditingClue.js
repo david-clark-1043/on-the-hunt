@@ -80,7 +80,7 @@ export const ClueEditing = ({ currentClue, handleClueInput, clueTypes, editingCl
                 <div className="clueText">
                     <label htmlFor="clueText">Clue Hint: </label>
                     <input
-                        required autoFocus
+                        required
                         type="text"
                         id="clueText"
                         className="form-control"
@@ -116,7 +116,7 @@ export const ClueEditing = ({ currentClue, handleClueInput, clueTypes, editingCl
                             <div className="form-group">
                                 <label htmlFor="clueAnswer">Clue Answer: </label>
                                 <input
-                                    required autoFocus
+                                    required
                                     type="text"
                                     id="clueAnswer"
                                     className="form-control"
@@ -129,7 +129,7 @@ export const ClueEditing = ({ currentClue, handleClueInput, clueTypes, editingCl
                         <div className="form-group">
                         <label htmlFor="clueAnswer">Clue Answer: </label>
                         <input
-                            required autoFocus
+                            required
                             type="text"
                             id="clueAnswer"
                             className="form-control"

@@ -6,8 +6,8 @@
     display: flex;
     justify-content: space-between;
     text-align: left;
-    background-color: rgba(255, 239, 213);
-    border-radius: 1em;
+    /* background-color: rgba(255, 239, 213);
+    border-radius: 1em; */
     margin: .5em;
     padding: .5em;
 }

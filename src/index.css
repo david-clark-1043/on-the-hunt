@@ -32,6 +32,15 @@ button {
   border-radius: 1em;
 } */
 
+/* 
+
+*/
+
+.backdrop {
+  border: 0;
+  background-color: transparent;
+}
+
 button:active {
   background-color: rgb(201, 152, 87);
   box-shadow: 0 0;
