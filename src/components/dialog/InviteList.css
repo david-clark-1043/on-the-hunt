@@ -1,4 +1,4 @@
-/* .inviteList {
+.inviteList {
     max-width: fit-content;
 }
 
@@ -6,7 +6,7 @@
     display: flex;
     justify-content: space-between;
     text-align: left;
-    background-color: aliceblue;
+    background-color: rgba(255, 239, 213);
     border-radius: 1em;
     margin: .5em;
     padding: .5em;
@@ -14,4 +14,10 @@
 
 .userListing > * {
     margin: 0 .5em;
-} */
+}
+
+.userListing > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}

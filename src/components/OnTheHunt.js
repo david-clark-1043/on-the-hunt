@@ -8,7 +8,7 @@ import "./OnTheHunt.css";
 import { Footer } from "./footer/Footer";
 
 export const OnTheHunt = () => {
-    const [loading, setLoading] = useState(true)
+
     return (
         <>
             <Route
@@ -18,7 +18,7 @@ export const OnTheHunt = () => {
                             <> 
                                 <h1>On the Hunt</h1>
                                 <NavBar />
-                                <ApplicationViews loading={loading} setLoading={setLoading} />
+                                <ApplicationViews />
                                 <Footer />
                             </>
                         );

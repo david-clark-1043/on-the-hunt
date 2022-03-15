@@ -25,14 +25,23 @@
 
  */
 
- .createHunt {
+.createHunt {
     margin-top: 1em;
     padding: 1em;
     border-radius: 1em;
     border: 1px dashed black;
 }
 
- .editingClue {
+fieldset {
+    display: flex;
+}
+
+input.form-control {
+    height: 2.5em;
+    padding: 0 .5em;
+}
+
+.editingClue {
     border: 1px dashed black;
     border-radius: 1em;
     /* margin: 1em; */

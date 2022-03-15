@@ -23,6 +23,19 @@ button {
   padding: .75em;
   margin: .5em;
   border: 0;
+  box-shadow: 2px 2px;
+}
+
+dialog {
+  border: 1px dashed black;
+  background-color: rgb(253, 221, 170);
+  border-radius: 1em;
+}
+
+button:active {
+  background-color: rgb(201, 152, 87);
+  box-shadow: 0 0;
+  transform: translateX(2px) translateY(4px);
 }
 
 button:hover {
