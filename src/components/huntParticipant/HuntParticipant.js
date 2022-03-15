@@ -127,7 +127,7 @@ export const HuntParticipant = (props) => {
             <div className="clueBox">
                 <div>
                     <div className="header">
-                        <h2>{props.hunt.title}</h2>
+                        <div><h2>{props.hunt.title}</h2></div>
                         <button onClick={() => history.goBack()}>Back</button>
                     </div>
                     <div className="currentStepBox">
@@ -143,7 +143,7 @@ export const HuntParticipant = (props) => {
                                         Category: {currentClue?.clueType?.type} Clue
                                     </div>
                                     <div className="currentClueText">
-                                        {currentClue?.clueText}
+                                        Hint: {currentClue?.clueText}
                                     </div>
                                     <div>
                                         {

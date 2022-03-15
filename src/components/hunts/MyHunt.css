@@ -41,7 +41,7 @@
 
 
 .hunts[style*="visible"] { 
-    animation-duration: 1s;
+    animation-duration: .33s;
     animation-name: slidein;
     animation-timing-function: ease-in;
 }

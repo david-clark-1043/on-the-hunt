@@ -40,7 +40,7 @@ export const HuntCreator = (props) => {
                 const filteredHunts = props.userHunts.filter(uh => {
                     return uh.user && uh.huntId === props.hunt.id
                 })
-                .map(uh => {
+                    .map(uh => {
                         return <div className="hunterStatus" key={`hunterStatus--${uh.id}`}>
                             <div>
                                 <div>{uh.user.name}</div>
@@ -52,8 +52,8 @@ export const HuntCreator = (props) => {
                                 id={`userHunt--${uh.huntId}--${uh.userId}`}
                                 onClick={checkProgressNav}>Check Progress</button>
                         </div>
-                })
-                if(typeof filteredHunts[0] === 'object') {
+                    })
+                if (typeof filteredHunts[0] === 'object') {
                     setCurrentUserHunts(filteredHunts)
                 } else {
                     setCurrentUserHunts([<div>No users hunting this scavenger hunt.</div>])
@@ -83,8 +83,8 @@ export const HuntCreator = (props) => {
                                     <div>Clue {index + 1}</div>
                                     <div>{clue.clueType?.type} clue</div>
                                 </div>
-                                <div className="clueText">Clue Hint: {clue.clueText}</div>
-                                <div className="clueAnswer">Clue Answer: {clue.clueAnswer}</div>
+                                <div className="clueText">Hint: {clue.clueText}</div>
+                                <div className="clueAnswer">Answer: {clue.clueAnswer}</div>
                             </div>
                             <div className="stepButtons">
                                 <button className="stepEdit" id={`${clue.id}`} onClick={openEditor}>
@@ -150,13 +150,17 @@ export const HuntCreator = (props) => {
     }
 
     const deleteClue = (event) => {
-        const copyClues = props.clues.map(clue => ({ ...clue }))
-        const clue = copyClues.find(c => c.id === parseInt(event.target.id))
-        ClueRepository.deleteClue(clue)
-            .then(() => {
-                return ClueRepository.getCluesForHunt(props.hunt.id)
-            })
-            .then(props.setClues)
+        if(props.clues.length === 1) {
+            window.alert("You can't delete the last clue. Delete the hunt if you would like to remove it.")
+        } else {
+            const copyClues = props.clues.map(clue => ({ ...clue }))
+            const clue = copyClues.find(c => c.id === parseInt(event.target.id))
+            ClueRepository.deleteClue(clue)
+                .then(() => {
+                    return ClueRepository.getCluesForHunt(props.hunt.id)
+                })
+                .then(props.setClues)
+        }
     }
 
     return (
@@ -165,10 +169,10 @@ export const HuntCreator = (props) => {
 
                 <div className="huntBox">
                     <div>
-                    <div className="header">
-                        <h2>{props.hunt.title}</h2>
-                        <button onClick={() => history.goBack()}>Back</button>
-                    </div>
+                        <div className="header">
+                            <h2>{props.hunt.title}</h2>
+                            <button onClick={() => history.goBack()}>Back</button>
+                        </div>
                         <h3>Clues</h3>
                         <article className="stepList">
                             {clueJSX}

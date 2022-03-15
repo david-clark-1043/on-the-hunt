@@ -38,12 +38,12 @@ export const MyHunts = () => {
 
     useEffect(
         () => {
-            if(currentUser > 0) {
+            if (currentUser > 0) {
                 let filteredHunts = []
                 let filteredUserHunts = []
                 if (typeof hunts[0] === 'object') {
                     filteredHunts = hunts.filter(hunt => hunt.userId === currentUser)
-                    if(typeof filteredHunts[0] === 'object') {
+                    if (typeof filteredHunts[0] === 'object') {
                         setHuntmaster(filteredHunts)
                     } else {
                         setHuntmaster([""])
@@ -51,7 +51,7 @@ export const MyHunts = () => {
                 }
                 if (typeof userHunts[0] === 'object') {
                     filteredUserHunts = userHunts.filter(userHunt => userHunt.userId === currentUser)
-                    if(typeof filteredUserHunts[0] === 'object') {
+                    if (typeof filteredUserHunts[0] === 'object') {
                         setHunterList(filteredUserHunts)
                     } else {
                         setHunterList([""])
@@ -64,29 +64,21 @@ export const MyHunts = () => {
     useEffect(
         () => {
             if (typeof huntmasterList[0] === "string") {
-                setHuntmasterJSX([<div>You have no hunts</div>])
+                setHuntmasterJSX([<div key="huntmaster--1">You have no hunts</div>])
             } else if (typeof huntmasterList[0] === 'object') {
                 const JSX = huntmasterList.map(hunt => {
-                            return (
-                                <div key={hunt.hunt?.id ? `hunter--${hunt.hunt.id}` : `huntmaster--${hunt.id}`}>
-                                    {hunt.hunt
-                                        ? <button
-                                            className="huntTitle"
-                                            id={`${hunt.hunt.id}`}
-                                            onClick={huntNavigate}>
-                                            {hunt.hunt.title}
-                                        </button>
-                                        : <button
-                                            className="huntTitle"
-                                            id={`${hunt.id}`}
-                                            onClick={huntNavigate}>
-                                            {hunt.title}
-                                        </button>
-                                    }
-                                </div>
+                    return (
+                        <div key={`huntmaster--${hunt.id}`}>
+                            <button
+                                className="huntTitle"
+                                id={`${hunt.id}`}
+                                onClick={huntNavigate}>
+                                {hunt.title}
+                            </button>
+                        </div>
 
-                            )
-                        })
+                    )
+                })
                 setHuntmasterJSX(JSX)
             }
         }, [huntmasterList]
@@ -94,29 +86,21 @@ export const MyHunts = () => {
     useEffect(
         () => {
             if (typeof hunterList[0] === "string") {
-                setHunterJSX([<div>You have no hunts</div>])
+                setHunterJSX([<div key="hunter--1">You have no hunts</div>])
             } else if (typeof hunterList[0] === 'object') {
                 const JSX = hunterList.map(hunt => {
-                            return (
-                                <div key={hunt.hunt?.id ? `hunter--${hunt.hunt.id}` : `huntmaster--${hunt.id}`}>
-                                    {hunt.hunt
-                                        ? <button
-                                            className="huntTitle"
-                                            id={`${hunt.hunt.id}`}
-                                            onClick={huntNavigate}>
-                                            {hunt.hunt.title}
-                                        </button>
-                                        : <button
-                                            className="huntTitle"
-                                            id={`${hunt.id}`}
-                                            onClick={huntNavigate}>
-                                            {hunt.title}
-                                        </button>
-                                    }
-                                </div>
+                    return (
+                        <div key={`hunter--${hunt.hunt.id}`}>
+                            <button
+                                className="huntTitle"
+                                id={`${hunt.hunt.id}`}
+                                onClick={huntNavigate}>
+                                {hunt.hunt.title}
+                            </button>
+                        </div>
 
-                            )
-                        })
+                    )
+                })
                 setHunterJSX(JSX)
             }
         }, [hunterList]
@@ -126,80 +110,24 @@ export const MyHunts = () => {
         () => {
             const hunterCheck = typeof hunterJSX[0] === 'object'
             const huntmasterCheck = typeof huntmasterJSX[0] === 'object'
-            if(hunterCheck && huntmasterCheck) {
+            if (hunterCheck && huntmasterCheck) {
                 setLoading(false)
             }
         }, [hunterJSX, huntmasterJSX]
     )
 
-    // filteredHunts.map(hunt => {
-    //     return (
-    //         <div key={hunt.hunt?.id ? `hunter--${hunt.hunt.id}` : `huntmaster--${hunt.id}`}>
-    //             {hunt.hunt
-    //                 ? <button
-    //                     className="huntTitle"
-    //                     id={`${hunt.hunt.id}`}
-    //                     onClick={huntNavigate}>
-    //                     {hunt.hunt.title}
-    //                 </button>
-    //                 : <button
-    //                     className="huntTitle"
-    //                     id={`${hunt.id}`}
-    //                     onClick={huntNavigate}>
-    //                     {hunt.title}
-    //                 </button>
-    //             }
-    //         </div>
-
-    //     )
-    // })
     const huntNavigate = (event) => {
         history.push(`/hunts/${event.target.id}`)
     }
 
-    const huntList = (list) => {
-        // list of hunts where userId = hunt.userId
-        const filteredHunts = list.filter(hunt => hunt.userId === currentUser)
-        if (filteredHunts.length > 0) {
-            return (
-                <>
-                    {filteredHunts.map(hunt => {
-                        return (
-                            <div key={hunt.hunt?.id ? `hunter--${hunt.hunt.id}` : `huntmaster--${hunt.id}`}>
-                                {hunt.hunt
-                                    ? <button
-                                        className="huntTitle"
-                                        id={`${hunt.hunt.id}`}
-                                        onClick={huntNavigate}>
-                                        {hunt.hunt.title}
-                                    </button>
-                                    : <button
-                                        className="huntTitle"
-                                        id={`${hunt.id}`}
-                                        onClick={huntNavigate}>
-                                        {hunt.title}
-                                    </button>
-                                }
-                            </div>
-
-                        )
-                    })
-                    }
-                </>
-            )
-        }
-        return (
-            <div>You have no hunts.</div>
-        )
-    }
 
     return (
         <>
             <main className="mainContainer" >
-                <div className="loading" style={{visibility: loading ? "visible" : "hidden"}}>
+                <div className="loading" style={{ visibility: loading ? "visible" : "hidden" }}>
                     Loading...
                 </div>
-                <div className="hunts" style={{visibility: loading ? "hidden" : "visible"}}>
+                <div className="hunts" style={{ visibility: loading ? "hidden" : "visible" }}>
                     <h2>Your Hunts</h2>
                     <article className="huntList">
                         <div className="huntmaster">
