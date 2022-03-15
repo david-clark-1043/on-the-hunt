@@ -50,15 +50,24 @@ export const CreateHunt = () => {
         const huntCheck = newHunt.title && newHunt.rewardText
         // clue has hint // clue has answer // clue has type
         const clueCheck = cluesToAdd.reduce((returnValue, currentClue) => {
-            const clueReduceCheck = currentClue.clueAnswer && currentClue.clueText && currentClue.clueType
-            return clueReduceCheck || returnValue
+            const clueReduceCheck = currentClue.clueAnswer && currentClue.clueText && currentClue.clueTypeId
+            if(!clueReduceCheck || returnValue === false) {
+                return false
+            } else {
+                return true
+            }
         }, true)
         // has huntId // has userId // has stepsCompleted = 0
-        const userHuntCheck = userHuntsToAdd.reduce((returnValue, currentUH) => {
-            const uhReduceCheck = currentUH.stepsCompleted === 0 && currentUH.userId
-            return uhReduceCheck || returnValue
-        }, true)
-        if (huntCheck && clueCheck && userHuntCheck) {
+        // only use if error with adding userHunts
+        // const userHuntCheck = userHuntsToAdd.reduce((returnValue, currentUH) => {
+        //     const uhReduceCheck = currentUH.stepsCompleted === 0 && currentUH.userId
+        //     if(!uhReduceCheck || !returnValue) {
+        //         return false
+        //     } else {
+        //         return true
+        //     }
+        // }, true)
+        if (huntCheck && clueCheck /*&& userHuntCheck*/) {
             // add userId to hunt
             newHunt.userId = parseInt(getCurrentUser())
             // add hunt to hunt database
@@ -89,11 +98,15 @@ export const CreateHunt = () => {
                     })
                 })
                 .then(userHuntsWithData => {
-                    const arr = []
-                    for (const userHunt of userHuntsWithData) {
-                        arr.push(UserHuntRepository.sendUserHunt(userHunt))
+                    if(userHuntsWithData.length === 1 && userHuntsWithData[0].userId === 0) {
+                        
+                    } else {
+                        const arr = []
+                        for (const userHunt of userHuntsWithData) {
+                            arr.push(UserHuntRepository.sendUserHunt(userHunt))
+                        }
+                        return Promise.all(arr)
                     }
-                    return Promise.all(arr)
                 })
                 .then(() => {
                     history.push("/home")
