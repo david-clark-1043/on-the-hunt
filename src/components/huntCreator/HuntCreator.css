@@ -1,9 +1,9 @@
 .huntBox {
     min-width: 75%;
     min-height: 75%;
-    margin: 1em;
     padding: 1em;
-    border: 1px blue dashed;
+    border: 1px black dashed;
+    border-radius: 1em;
 }
 
 .stepButtons {
@@ -15,9 +15,10 @@
 .singleStep {
     display: flex;
     justify-content: space-between;
-    margin: 1em;
+    margin: .5em 0;
     padding: .5em;
-    border: 1px blue dashed;
+    border: 1px black dashed;
+    border-radius: .5em;
 }
 
 .stepInfo {
@@ -25,7 +26,7 @@
     flex-direction: column;
     justify-content: space-between;
     min-width: 70%;
-    /* text-align: center; */
+    text-align: center;
 }
 
 .clueStats {
@@ -38,18 +39,33 @@
     margin: .1em 1em;
 }
 
-.clueText {
+.clueText, .clueAnswer {
     text-align: left;
 }
 
-.hunterStatus {
+.hunterInfo {
     display: flex;
-    margin: 1em;
-    padding: 1em;
+
+}
+.header {
+    display: flex;
     justify-content: space-between;
-    border: 1px blue dashed;
 }
 
 .huntBox h2 {
     text-align: center;
+} 
+.hunterStatus {
+    display: flex;
+    margin: .5em 0;
+    padding: .1em .1em .1em .5em;
+    justify-content: space-between;
+    border: 1px black dashed;
+    border-radius: .5em;
+}
+
+.hunterStatus > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

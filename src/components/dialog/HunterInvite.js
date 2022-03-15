@@ -14,8 +14,6 @@ export const HunterInvite = ({hunt, userHunts, setUserHunts }) => {
         }}
         onClose={(e, dialog) => {
           setModal(false)
-          const value = dialog.returnValue
-          if (value) alert(`You answered "${dialog.returnValue}" to the modal`)
         }}
       >
         <InviteDialog toggleDialog={setModal} hunt={hunt} userHunts={userHunts} setUserHunts={setUserHunts}/>

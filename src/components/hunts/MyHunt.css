@@ -1,9 +1,5 @@
-.mainContainer {
+/* .mainContainer {
     display: flex;
-}
-
-.mainContainer > div {
-    border: 1px dashed blue;
 }
 
 .huntList .huntTitle {
@@ -16,13 +12,29 @@
     padding: 1em;
 }
 
-.hunts {
-    min-width: 75%;
-    min-height: 75%;
-    margin: 1em;
-    padding: 1em;
-}
-
-/* .huntList > div > section {
+.huntList > div > section {
     display: flex;
 } */
+
+.huntmasterList, .asHunterList {
+    display: flex;
+}
+
+.hunts {
+    border: 1px dashed black;
+    border-radius: 1em;
+    min-width: 75%;
+    min-height: 75%;
+    padding: 1em;
+    margin-top: 1em;
+}
+
+.loading[style*="visible"] {
+    text-align: center;
+    border: 1px dashed black;
+    border-radius: 1em;
+    min-width: 75%;
+    min-height: 75%;
+    padding: 1em;
+    margin-top: 1em;
+}

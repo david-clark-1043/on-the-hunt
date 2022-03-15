@@ -1,7 +1,9 @@
+@import url("https://fonts.googleapis.com/css?family=Oxygen");
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  margin: 1em;
+  background-color: rgba(255, 239, 213, 0.493);
+  font-family: -apple-system, BlinkMacSystemFont, 'Oxygen', 'Ubuntu', 'Segoe UI', 'Roboto', 
+     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -12,9 +14,25 @@ code {
     monospace;
 }
 
-dialog {
-  position: absolute;
-  top: 1em;
-  z-index: 12;
-  width: 70%;
+button {
+  background-color: burlywood;
+  font-weight: bold;
+  cursor: pointer;
+  color: rgb(49, 49, 49);
+  border-radius: 1em;
+  padding: .75em;
+  margin: .5em;
+  border: 0;
+}
+
+button:hover {
+  background-color: rgb(201, 152, 87);
+}
+
+h1 {
+  text-align: center;
+}
+
+a {
+  color: brown;
 }

@@ -1,15 +1,20 @@
 .navBar {
     display: flex;
-    margin: 1em;
     padding: 1em;
-    border: dashed blue 1px;
-    border-radius: 1em
+    border: dashed black 1px;
+    border-radius: 1em;
+    justify-content: space-between;
 }
 
 .navbar__item {
-    margin: 0 1em 0 0;
-    border: dotted green 1px;
+    /* margin: 0 1em 0 0; */
+    /* border: dotted brown 1px; */
     padding: .2em 1em;
     border-radius: 1em;
 }
 
+@media screen and (min-width:1000px) {
+    .navBar {
+        padding: 0 5em;
+    }
+}

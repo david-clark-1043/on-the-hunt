@@ -1,11 +1,12 @@
 import React, { useRef, useState } from "react"
 import { useHistory } from "react-router-dom"
 import Settings from "../../repositories/Settings";
+import { Modal } from "react-dialog-polyfill"
 import "./Login.css"
 
 export const Register = (props) => {
     const [customer, setCustomer] = useState({})
-    const conflictDialog = useRef()
+    const [conflictDialog, setConflictDialog] = useState()
 
     const history = useHistory()
 
@@ -30,12 +31,12 @@ export const Register = (props) => {
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
                                 localStorage.setItem("hunt_customer", createdUser.id)
-                                history.push("/")
+                                history.push("/home")
                             }
                         })
                 }
                 else {
-                    //conflictDialog.current.showModal()
+                    setConflictDialog(true)
                 }
             })
     }
@@ -49,10 +50,17 @@ export const Register = (props) => {
 
     return (
         <main style={{ textAlign: "center" }}>
-            <dialog className="dialog dialog--password" ref={conflictDialog}>
+            <Modal open={conflictDialog}
+                onCancel={(e, dialog) => {
+                    e.preventDefault()
+                    setConflictDialog(false)
+                }}
+                onClose={(e, dialog) => {
+                    setConflictDialog(false)
+                }}>
                 <div>Account with that email address already exists</div>
-                <button className="button--close" onClick={e => conflictDialog.current.close()}>Close</button>
-            </dialog>
+                <button className="button--close" onClick={e => setConflictDialog(false)}>Close</button>
+            </Modal>
 
             <form className="form--login" onSubmit={handleRegister}>
                 <h1 className="h3 mb-3 font-weight-normal">Please Register for On the Hunt</h1>

@@ -9,8 +9,11 @@ import ClueTypeRepository from "../../repositories/ClueTypeRepository";
 import ClueRepository from "../../repositories/ClueRepository";
 
 export const HuntCreator = (props) => {
+
     const [editingClue, setEditing] = useState(false)
     const [currentClue, setCurrentClue] = useState({})
+    const [currentUserHunts, setCurrentUserHunts] = useState([])
+    const [clueJSX, setClueJSX] = useState([])
     const [deleteModal, toggleDeleteModal] = useState(false)
     const history = useHistory()
 
@@ -29,6 +32,84 @@ export const HuntCreator = (props) => {
                 setEditing(!editingClue)
             }
         }, [currentClue]
+    )
+
+    useEffect(
+        () => {
+            if (props.userHunts) {
+                const filteredHunts = props.userHunts.filter(uh => {
+                    return uh.user && uh.huntId === props.hunt.id
+                })
+                .map(uh => {
+                        return <div className="hunterStatus" key={`hunterStatus--${uh.id}`}>
+                            <div>
+                                <div>{uh.user.name}</div>
+                            </div>
+                            <div>
+                                <div>Steps completed {uh.stepsCompleted > props.clues.length ? props.clues.length : uh.stepsCompleted}</div>
+                            </div>
+                            <button className="checkProgressButton"
+                                id={`userHunt--${uh.huntId}--${uh.userId}`}
+                                onClick={checkProgressNav}>Check Progress</button>
+                        </div>
+                })
+                if(typeof filteredHunts[0] === 'object') {
+                    setCurrentUserHunts(filteredHunts)
+                } else {
+                    setCurrentUserHunts([<div>No users hunting this scavenger hunt.</div>])
+                }
+            }
+        }, [props]
+    )
+
+    useEffect(
+        () => {
+            if (editingClue) {
+                const clueJS = [<ClueEditing
+                    currentClue={currentClue}
+                    setCurrentClue={setCurrentClue}
+                    handleClueInput={handleClueInput}
+                    clueTypes={clueTypes}
+                    editingClue={editingClue}
+                    setEditing={setEditing}
+                    saveStep={saveStep} />]
+                setClueJSX(clueJS)
+            } else {
+                if (props.clues) {
+                    const clueJS = props.clues.map((clue, index) => {
+                        return <section className="singleStep" key={`clue--${clue.id}`}>
+                            <div className="stepInfo">
+                                <div className="clueStats">
+                                    <div>Clue {index + 1}</div>
+                                    <div>{clue.clueType?.type} clue</div>
+                                </div>
+                                <div className="clueText">Clue Hint: {clue.clueText}</div>
+                                <div className="clueAnswer">Clue Answer: {clue.clueAnswer}</div>
+                            </div>
+                            <div className="stepButtons">
+                                <button className="stepEdit" id={`${clue.id}`} onClick={openEditor}>
+                                    Edit
+                                </button>
+                                <button className="stepDelete" id={`${clue.id}`} onClick={deleteClue}>
+                                    Delete
+                                </button>
+                            </div>
+                        </section>
+                    })
+                    setClueJSX(clueJS)
+                }
+            }
+        }, [props, editingClue]
+    )
+
+    useEffect(
+        () => {
+            const userHuntCheck = typeof currentUserHunts[0] === 'object'
+            const clueCheck = typeof clueJSX[0] === 'object'
+            if (userHuntCheck && clueCheck) {
+                props.setLoading(false)
+            }
+        }, [currentUserHunts, clueJSX]
     )
 
     const handleClueInput = (event, parse = false) => {
@@ -81,57 +162,22 @@ export const HuntCreator = (props) => {
     return (
         <>
             <main className="mainContainer">
+
                 <div className="huntBox">
                     <div>
-                        <h2>Scavenger Hunt: {props.hunt.title}</h2>
+                    <div className="header">
+                        <h2>{props.hunt.title}</h2>
+                        <button onClick={() => history.goBack()}>Back</button>
+                    </div>
                         <h3>Clues</h3>
                         <article className="stepList">
-                            {
-                                editingClue
-                                    ? <ClueEditing
-                                        currentClue={currentClue}
-                                        setCurrentClue={setCurrentClue}
-                                        handleClueInput={handleClueInput}
-                                        clueTypes={clueTypes}
-                                        editingClue={editingClue}
-                                        setEditing={setEditing}
-                                        saveStep={saveStep} />
-                                    : props.clues?.map((clue, index) => {
-                                        return <section className="singleStep" key={`clue--${clue.id}`}>
-                                            <div className="stepInfo">
-                                                <div className="clueStats">
-                                                    <div>Clue {index + 1}</div>
-                                                    <div>{clue.clueType?.type} clue</div>
-                                                </div>
-                                                <div className="clueText">Clue Hint: {clue.clueText}</div>
-                                                <div className="clueAnswer">Clue Answer: {clue.clueAnswer}</div>
-                                            </div>
-                                            <div className="stepButtons">
-                                                <button className="stepEdit" id={`${clue.id}`} onClick={openEditor}>
-                                                    Edit
-                                                </button>
-                                                <button className="stepDelete"id={`${clue.id}`} onClick={deleteClue}>
-                                                    Delete
-                                                </button>
-                                            </div>
-                                        </section>
-                                    })}
+                            {clueJSX}
                         </article>
                     </div>
                     <div>
                         <h3>Hunters</h3>
                         <article className="hunterList">
-                            {props.userHunts?.map(uh => {
-                                if (uh.user && uh.huntId === props.hunt.id) {
-                                    return <div className="hunterStatus" key={`hunterStatus--${uh.id}`}>
-                                        <div>{uh.user.name}</div>
-                                        <div>Steps completed {uh.stepsCompleted > props.clues.length ? props.clues.length : uh.stepsCompleted}</div>
-                                        <button className="checkProgressButton"
-                                            id={`userHunt--${uh.huntId}--${uh.userId}`}
-                                            onClick={checkProgressNav}>Check Progress</button>
-                                    </div>
-                                }
-                            })}
+                            {currentUserHunts}
                         </article>
                     </div>
                     <div>

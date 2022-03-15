@@ -1,22 +1,30 @@
 .clueContainer {
-    margin: 1em;
     padding: 1em;
-    border: 1px dashed blue;
+    border: 1px dashed black;
+    border-radius: 1em;
 }
 
 .currentStepBox {
     margin: 1em;
     padding: 1em;
-    border: 1px dashed blue;
+    /* border: 1px dashed black; */
 }
 
-.compeletedStepsBox {
-    margin: 1em;
+/* .compeletedStepsBox {
+    margin: .2em;
     padding: 1em;
-    border: 1px dashed blue;
-}
+    border: 1px dashed black;
+    border-radius: .5em;
+} */
+
 .completedClueListing{
-    margin: 1em;
+    margin: .1em;
     padding: 1em;
-    border: 1px dashed blue;
+    border: 1px dashed black;
+    border-radius: .5em;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
 }

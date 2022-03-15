@@ -101,17 +101,21 @@ export const ClueForm = ({ cluesToAdd, setCluesToAdd, editingClue, setEditing })
                     saveStep={saveStep}
                 />
                 : <>
-                    <h2>Clues</h2>
+                    <h3>Clues</h3>
                     <div className="clueList">
                         {cluesToAdd.map((clue, index) => {
                             if (clue.clueText) {
                                 return <div className="singleClue" key={`clue--${index}`}>
                                     <div className="clueListing">
                                         <div>Clue {index + 1}</div>
-                                        <div>{clue.clueText}</div>
+                                        <div>Hint: {clue.clueText}</div>
+                                        <hr/>
+                                        <div>Answer: {clue.clueAnswer}</div>
                                     </div>
+                                    <div className="clueButtons">
                                     <button className="editClue" id={`${index}`} onClick={handleEdit}>Edit</button>
                                     <button className="deleteClue" id={`${index}`} onClick={handleDelete}>Delete</button>
+                                    </div>
                                 </div>
                             }
                         })}

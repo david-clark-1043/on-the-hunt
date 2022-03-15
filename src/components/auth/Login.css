@@ -1,13 +1,36 @@
-.h1, h1 {
-    font-size: 2.5rem;
-}
-
 fieldset {
     min-width: 0;
     padding: 1rem 0;
     margin: 0;
     border: 0;
+    display: flex;
+    flex-direction: column;
 }
+
+h1, h2 {
+    text-align: center;
+}
+
+fieldset > label {
+    margin: .5em 0;
+}
+
+fieldset > input {
+    height: 2.5em;
+}
+
+@media screen and (min-width: 700px) {
+    .container--login {
+        max-width: 50%;
+        margin: 0 25%;
+    }
+}
+/* .form--login > fieldset > input[type="email"] {
+    width: 25em;
+} */
+/* 
+
+
 
 .form--login {
     display: inline-block;
@@ -15,9 +38,6 @@ fieldset {
     text-align: left;
 }
 
-.form--login > fieldset > input[type="email"] {
-    width: 25em;
-}
 
 .label--login {
     width: 8rem;
@@ -50,7 +70,6 @@ fieldset {
     z-index: 1;
     min-height: 25rem;
     min-width: 45rem;
-    background-color: hsla(0,0%,100%,0.40);
     background-blend-mode: overlay;
     background-repeat: no-repeat;
 }
@@ -59,9 +78,4 @@ fieldset {
     position: relative;
     bottom: -2rem;
 }
-
-.dialog {
-    min-width: 15rem;
-    min-height: 5rem;
-}
-
+ */
