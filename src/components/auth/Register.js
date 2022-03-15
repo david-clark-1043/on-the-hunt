@@ -69,7 +69,7 @@ export const Register = (props) => {
                     <label htmlFor="name"> Full Name </label>
                     <input onChange={updateCustomer}
                            type="text" id="name" className="form-control"
-                           placeholder="Enter your name" required autoFocus />
+                           placeholder="Enter your name" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="email"> Email address </label>

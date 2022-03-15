@@ -7,7 +7,7 @@ export const InviteSearch = ({ setSearchInput }) => {
                 <div className="form-group">
                     <label htmlFor="name">Search: </label>
                     <input
-                        required autoFocus
+                        required
                         type="text"
                         className="form-control"
                         placeholder="Search name"

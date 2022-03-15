@@ -115,7 +115,7 @@ export const CreateHunt = () => {
                     <div className="form-group">
                         <label htmlFor="title">Hunt Title: </label>
                         <input
-                            required autoFocus
+                            required
                             type="text"
                             id="title"
                             className="form-control"
