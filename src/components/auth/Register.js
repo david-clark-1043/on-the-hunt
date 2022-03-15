@@ -11,7 +11,7 @@ export const Register = (props) => {
     const history = useHistory()
 
     const existingUserCheck = () => {
-        return fetch(`${Settings.remoteURL}/customers?email=${customer.email}`)
+        return fetch(`${Settings.remoteURL}/users?email=${customer.email}`)
             .then(res => res.json())
             .then(user => !!user.length)
     }
@@ -20,7 +20,7 @@ export const Register = (props) => {
         existingUserCheck()
             .then((userExists) => {
                 if (!userExists) {
-                    fetch(`${Settings.remoteURL}/customers`, {
+                    fetch(`${Settings.remoteURL}/users`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"
