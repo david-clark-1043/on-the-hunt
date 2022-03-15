@@ -6,6 +6,7 @@ import "./HuntParticipant.css"
 export const HuntParticipant = (props) => {
     const [currentClue, setCurrentclue] = useState({})
     const [completedClues, setCompletedClues] = useState([])
+    const [JSX, setJSX] = useState([])
     const history = useHistory()
 
     useEffect(
@@ -21,6 +22,50 @@ export const HuntParticipant = (props) => {
             setCompletedClues(completes)
             setCurrentclue(clue)
         }, [props.userHunt, props.clues]
+    )
+
+    useEffect(
+        () => {
+            if (typeof currentClue === 'object' && "clueType" in currentClue) {
+                if (props.userHunt.stepsCompleted >= props.clues.length) {
+                    const currentStepJSX = [<div className="huntCompleteBox">
+                        <div>Hunt Complete!</div>
+                        <div>{props.hunt.rewardText}</div>
+                    </div>]
+                    setJSX(currentStepJSX)
+                } else {
+                    const currentStepJSX = [
+                        <div>
+                            <h3 className="currentStepTitle">Clue {props.clues?.findIndex(clue => clue.id === currentClue?.id) + 1} of {props.clues.length}</h3>
+                            <div className="currentClueType">
+                                Category: {currentClue.clueType.type} Clue
+                            </div>
+                            <div className="currentClueText">
+                                {currentClue.clueText}
+                            </div>
+                            <div>
+                                {
+                                    currentClue.clueType.type === "Location"
+                                        ? <div>
+                                            <button onClick={checkLocation}>Check Location</button>
+                                        </div>
+                                        : null
+                                }
+                            </div>
+                        </div>
+                    ]
+                    setJSX(currentStepJSX)
+                }
+            }
+        }, [currentClue]
+    )
+
+    useEffect(
+        () => {
+            if(typeof JSX[0] === 'object') {
+                props.setLoading(false)
+            }
+        }, [JSX]
     )
 
     const error = () => {
@@ -81,8 +126,8 @@ export const HuntParticipant = (props) => {
         <main className="clueContainer">
             <div className="clueBox">
                 <div>
-                    <div>
-                        <h2>Scavenger Hunt: {props.hunt.title}</h2>
+                    <div className="header">
+                        <h2>{props.hunt.title}</h2>
                         <button onClick={() => history.goBack()}>Back</button>
                     </div>
                     <div className="currentStepBox">
@@ -90,7 +135,7 @@ export const HuntParticipant = (props) => {
                             props.userHunt?.stepsCompleted >= props.clues?.length
                                 ? <div className="huntCompleteBox">
                                     <div>Hunt Complete!</div>
-                                    <div>{props.hunt.rewardText}</div>
+                                    <div>Reward Message: {props.hunt.rewardText}</div>
                                 </div>
                                 : <div>
                                     <h3 className="currentStepTitle">Clue {props.clues?.findIndex(clue => clue.id === currentClue?.id) + 1} of {props.clues.length}</h3>

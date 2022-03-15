@@ -33,14 +33,14 @@ export const CreateHunt = () => {
     }
 
     const uninviteHunter = (event) => {
-        const copy = userHuntsToAdd.map(userHunt => ({...userHunt}))
+        const copy = userHuntsToAdd.map(userHunt => ({ ...userHunt }))
         const deletedArray = copy.filter(element => element.userId != parseInt(event.target.id))
-        if(!(typeof deletedArray[0] === 'object')){
+        if (!(typeof deletedArray[0] === 'object')) {
             setUserHuntsToAdd([{ userId: 0 }])
         } else {
             setUserHuntsToAdd(deletedArray)
         }
-        
+
 
     }
 
@@ -58,7 +58,7 @@ export const CreateHunt = () => {
             const uhReduceCheck = currentUH.stepsCompleted === 0 && currentUH.userId
             return uhReduceCheck || returnValue
         }, true)
-        if(huntCheck && clueCheck && userHuntCheck) {
+        if (huntCheck && clueCheck && userHuntCheck) {
             // add userId to hunt
             newHunt.userId = parseInt(getCurrentUser())
             // add hunt to hunt database
@@ -68,7 +68,7 @@ export const CreateHunt = () => {
                     addedHuntId = addedHunt.id
                     // add huntId to clues
                     return cluesToAdd.map((clue, index) => {
-                        const copy = {...clue}
+                        const copy = { ...clue }
                         copy.huntId = addedHuntId
                         copy.clueIndex = index + 1
                         return copy
@@ -83,7 +83,7 @@ export const CreateHunt = () => {
                 })
                 .then(() => {
                     return userHuntsToAdd.map(uh => {
-                        const copy = {...uh}
+                        const copy = { ...uh }
                         copy.huntId = addedHuntId
                         return copy
                     })
@@ -107,7 +107,7 @@ export const CreateHunt = () => {
     }
 
     return <>
-        <main className="creatHunt">
+        <main className="createHunt">
 
             <h2>Create New Hunt</h2>
             <form className="newHuntForm">
@@ -123,7 +123,6 @@ export const CreateHunt = () => {
                             onChange={handleFormInput} />
                     </div>
                 </fieldset>
-                <ClueForm cluesToAdd={cluesToAdd} setCluesToAdd={setCluesToAdd} editingClue={editingClue} setEditing={setEditing} />
                 <fieldset>
                     <div className="form-group">
                         <label htmlFor="rewardText">Reward Text: </label>
@@ -136,6 +135,7 @@ export const CreateHunt = () => {
                             onChange={handleFormInput} />
                     </div>
                 </fieldset>
+                <ClueForm cluesToAdd={cluesToAdd} setCluesToAdd={setCluesToAdd} editingClue={editingClue} setEditing={setEditing} />
             </form>
             <div className="hunters">
                 <h3>Hunters</h3>
@@ -145,9 +145,9 @@ export const CreateHunt = () => {
                             const foundUserHunt = userHuntsToAdd.find(uh => uh.userId === user.id)
                             if (foundUserHunt) {
                                 return <div className="invitedHunter" key={`invitee--${foundUserHunt.userId}`}>
-                                    <div>{user.name}</div>
-                                    <button className="deleteInvite" id={`${foundUserHunt.userId}`}onClick={uninviteHunter}>Uninvite</button>
-                                    </div>
+                                    <div><div>{user.name}</div></div>
+                                    <button className="deleteInvite" id={`${foundUserHunt.userId}`} onClick={uninviteHunter}>Uninvite</button>
+                                </div>
                             }
                         })
                     }
@@ -155,9 +155,9 @@ export const CreateHunt = () => {
             </div>
             <div className="createHuntButtons">
                 <HunterInvite hunt={{ id: -1 }} userHunts={userHuntsToAdd} setUserHunts={setUserHuntsToAdd} />
-                <button className="saveHuntButton" onClick={saveHunt}>Save Hunt</button>
-
             </div>
+            <hr />
+            <button className="saveHuntButton" onClick={saveHunt}>Save Hunt</button>
         </main>
     </>
 }

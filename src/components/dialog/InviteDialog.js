@@ -6,7 +6,8 @@ export const InviteDialog = ({toggleDialog, hunt, userHunts, setUserHunts}) => {
     const [searchInput, setSearchInput] = useState("")
 
     return (
-        <dialog id="dialog--invite" className="dialog--invite">
+        <>
+        {/* <dialog id="dialog--invite" className="dialog--invite"> */}
             <h2>Invite User</h2>
             <InviteSearch  setSearchInput={setSearchInput} />
             <InviteList toggleDialog={toggleDialog} 
@@ -15,9 +16,10 @@ export const InviteDialog = ({toggleDialog, hunt, userHunts, setUserHunts}) => {
                 userHunts={userHunts} 
                 setUserHunts={setUserHunts} />
             <button id="closeBtn"
-                onClick={toggleDialog}>
+                onClick={() => toggleDialog(false)}>
                 Close
             </button>
-        </dialog>
+        {/* </dialog> */}
+        </>
     )
 }

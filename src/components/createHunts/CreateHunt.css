@@ -1,13 +1,14 @@
 /* .newHuntForm {
     margin: 1em;
     padding: 1em;
-} */
+}
+
 .clueList {
     border: 1px dashed blue;
     padding: 1em;
 }
 
-.creatHunt {
+.createHunt {
     margin: 1em;
     padding: 1em;
     padding: 1em;
@@ -22,8 +23,46 @@
     display: flex;
 }
 
-.editingClue {
-    border: 1px dashed blue;
-    margin: 1em;
-    padding: .5em;
+ */
+
+ .createHunt {
+    margin-top: 1em;
+    padding: 1em;
+    border-radius: 1em;
+    border: 1px dashed black;
+}
+
+ .editingClue {
+    border: 1px dashed black;
+    border-radius: 1em;
+    /* margin: 1em; */
+    padding: 1em;
+}
+
+.singleClue {
+    display: flex;
+    border: 1px dashed black;
+    border-radius: .5em;
+    padding: .5em 1em;
+    margin: .5em 0;
+    justify-content: space-between;
+}
+
+.clueButtons {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.clueButtons > button {
+    margin: .1em;
+}
+
+.invitedHunter {
+    display: flex;
+}
+.invitedHunter > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

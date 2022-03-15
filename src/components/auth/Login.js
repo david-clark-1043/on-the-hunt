@@ -2,11 +2,12 @@ import React, { useRef, useState } from "react"
 import { Link } from "react-router-dom";
 import Settings from "../../repositories/Settings";
 import { useHistory } from "react-router-dom"
+import { Modal } from "react-dialog-polyfill"
 import "./Login.css"
 
 export const Login = () => {
     const [email, set] = useState("")
-    const existDialog = useRef()
+    const [existDialog, setExistDialog] = useState(false)
     const history = useHistory()
 
     const existingUserCheck = () => {
@@ -23,17 +24,24 @@ export const Login = () => {
                     localStorage.setItem("hunt_customer", exists.id)
                     history.push("/home")
                 } else {
-                    //existDialog.current.showModal()
+                    setExistDialog(true)
                 }
             })
     }
 
     return (
         <main className="container--login">
-            <dialog className="dialog dialog--auth" ref={existDialog}>
+            <Modal open={existDialog}
+                onCancel={(e, dialog) => {
+                    e.preventDefault()
+                    setExistDialog(false)
+                }}
+                onClose={(e, dialog) => {
+                    setExistDialog(false)
+                }}>
                 <div>User does not exist</div>
-                <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
-            </dialog>
+                <button className="button--close" onClick={e => setExistDialog(false)}>Close</button>
+            </Modal>
 
             <section>
                 <form className="form--login" onSubmit={handleLogin}>

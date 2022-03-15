@@ -1,12 +1,14 @@
-import React from "react";
+import {useState} from "react";
 import { Route, Redirect } from "react-router-dom";
 import { ApplicationViews } from "./ApplicationViews";
 import { NavBar } from "./nav/NavBar";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import "./OnTheHunt.css";
+import { Footer } from "./footer/Footer";
 
 export const OnTheHunt = () => {
+    const [loading, setLoading] = useState(true)
     return (
         <>
             <Route
@@ -16,7 +18,8 @@ export const OnTheHunt = () => {
                             <> 
                                 <h1>On the Hunt</h1>
                                 <NavBar />
-                                <ApplicationViews />
+                                <ApplicationViews loading={loading} setLoading={setLoading} />
+                                <Footer />
                             </>
                         );
                     } else {

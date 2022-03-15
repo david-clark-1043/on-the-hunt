@@ -9,6 +9,7 @@ import { HuntParticipant } from "../huntParticipant/HuntParticipant"
 
 
 export const Hunt = () => {
+    const [loading, setLoading] = useState(true)
     const [hunt, setHunt] = useState({})
     const [userHunts, setUserHunts] = useState([])
     const [userHunt, setUserHunt] = useState([])
@@ -45,6 +46,10 @@ export const Hunt = () => {
     )
 
     return <main>
+        <div className="loading" style={{ visibility: loading ? "visible" : "hidden" }}>
+            Loading...
+        </div>
+        <div style={{ visibility: loading ? "hidden" : "visible" }}>
         {getCurrentUser() === hunt.userId
             ? <HuntCreator
                 hunt={hunt}
@@ -53,17 +58,21 @@ export const Hunt = () => {
                 clues={clues}
                 setUserHunts={setUserHunts}
                 setClues={setClues}
-                setHunt={setHunt} />
+                setHunt={setHunt}
+                loading={loading}
+                setLoading={setLoading} />
             : <HuntParticipant
                 hunt={hunt}
                 userHunt={userHunt}
                 currentUser={getCurrentUser()}
                 clues={clues}
-                setUserHunts = { setUserHunts }
-                setClues = { setClues }
-            // setHunt = { setHunt } 
+                setUserHunts={setUserHunts}
+                setClues={setClues}
+                loading={loading}
+                setLoading={setLoading}
             />
         }
+        </div>
         {
             // JSON.stringify(clues)
         }
