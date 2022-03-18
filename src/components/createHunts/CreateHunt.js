@@ -79,7 +79,6 @@ export const CreateHunt = () => {
                     return cluesToAdd.map((clue, index) => {
                         const copy = { ...clue }
                         copy.huntId = addedHuntId
-                        copy.clueIndex = index + 1
                         return copy
                     })
                 })
