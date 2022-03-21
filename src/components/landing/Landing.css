@@ -1,0 +1,40 @@
+.landingMain {
+    padding: 1em;
+    display: flex;
+    flex-direction: horizontal;
+    justify-content: center;
+}
+
+.landingArticle {
+    text-align: center;
+}
+
+.landingLinks {
+    display: flex;
+    justify-content: center;
+}
+
+.landingLinks > div {
+    margin: 1em;
+}
+
+.landingHeader {
+    display: flex;
+    justify-content: center;
+}
+
+.landingHeader > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.landingMain > * { 
+    padding: 1em 4em;
+    border-radius: 1em;
+    background-color: rgb(248, 216, 164, .43);
+}
+
+.landingContents > * {
+    padding: 1em 0;
+}
