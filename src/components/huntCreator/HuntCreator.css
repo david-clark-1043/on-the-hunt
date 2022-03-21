@@ -26,7 +26,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-width: 70%;
+    width: 70%;
     text-align: center;
 }
 
@@ -75,4 +75,8 @@
 }
 .over {
     background-color: rgb(248, 216, 164);
+}
+
+.stepEdit, .stepDelete {
+    min-width: 4.5em;
 }
