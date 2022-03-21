@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react"
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 import Settings from "../../repositories/Settings";
 import { Modal } from "react-dialog-polyfill"
 import "./Login.css"
@@ -50,7 +50,7 @@ export const Register = (props) => {
 
 
     return (
-        <main style={{ textAlign: "center" }}>
+        <main className="container--login">
             <Modal open={conflictDialog}
                 onCancel={(e, dialog) => {
                     e.preventDefault()
@@ -79,6 +79,9 @@ export const Register = (props) => {
                     <button type="submit"> Register </button>
                 </fieldset>
             </form>
+            <section className="link--login">
+                <Link to="/login">Or Sign In</Link>
+            </section>
         </main>
     )
 }
