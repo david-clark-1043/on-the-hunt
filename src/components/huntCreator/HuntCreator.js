@@ -181,18 +181,8 @@ export const HuntCreator = (props) => {
                 
             }
 
-            if (editingClue)
-             {
-                const clueJS = [<ClueEditing
-                    key={"clueEdit--0"}
-                    currentClue={currentClue}
-                    setCurrentClue={setCurrentClue}
-                    handleClueInput={handleClueInput}
-                    clueTypes={clueTypes}
-                    editingClue={editingClue}
-                    setEditing={setEditing}
-                    saveStep={saveStep} />]
-                setClueJSX(clueJS)
+            if (editingClue) {
+
             } else {
                 if (props.clues) {
                     const clueJS = props.clues.map((clue, index) => {
@@ -306,7 +296,19 @@ export const HuntCreator = (props) => {
                         </div>
                         <h3>Clues</h3>
                         <article className="stepList">
-                            {clueJSX}
+                            {
+                            editingClue
+                            ?   <ClueEditing
+                                key={"clueEdit--0"}
+                                currentClue={currentClue}
+                                setCurrentClue={setCurrentClue}
+                                handleClueInput={handleClueInput}
+                                clueTypes={clueTypes}
+                                editingClue={editingClue}
+                                setEditing={setEditing}
+                                saveStep={saveStep} />
+                            : clueJSX
+                            }
                         </article>
                     </div>
                     <div>
