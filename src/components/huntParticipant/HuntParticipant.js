@@ -71,7 +71,6 @@ export const HuntParticipant = (props) => {
     const error = () => {
         window.alert("Unable to get your location.")
     }
-
     const success = (position) => {
         /*
             at lat 36 degrees
@@ -86,16 +85,15 @@ export const HuntParticipant = (props) => {
         const clueLat = currentClue.lat
         const clueLng = currentClue.lng
 
-        console.log(`clue lat: ${clueLat} - clue lng: ${clueLng}`)
         // calc distance from person to target
         const personLat = position.coords.latitude
         const personLng = position.coords.longitude
-        console.log(`person lat: ${personLat} - person lng: ${personLng}`)
+
         // if less than 500ft
         const maxDistance = 0.0013782618785
 
         const distance = Math.sqrt(((clueLat - personLat) ** 2) + ((clueLng - personLng) ** 2))
-        console.log(`max distance ${maxDistance} -- distance ${distance}`)
+
         if (distance < maxDistance) {
             const copy = JSON.parse(JSON.stringify(props.userHunt))
             delete copy.user
@@ -107,7 +105,9 @@ export const HuntParticipant = (props) => {
                 })
                 .then(props.setUserHunts)
         } else {
-            window.alert("Too far from goal")
+            const distInFeet = Math.floor((distance / maxDistance) * 500)
+            let string = `Too far from goal.\n You are ${distInFeet.toLocaleString('en-US')} feet away.`
+            window.alert(string)
         }
     }
 
