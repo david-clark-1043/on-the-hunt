@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useHistory, useLocation, useParams } from "react-router-dom"
 import ClueRepository from "../../repositories/ClueRepository"
 import UserHuntRepository from "../../repositories/UserHuntRepository"
+import "./HunterProgress.css";
 
 export const HunterProgress = () => {
     const [loading, setLoading] = useState(true)
@@ -36,7 +37,7 @@ export const HunterProgress = () => {
     useEffect(
         () => {
             if (typeof clues[0] === "object") {
-                if(userHunt.stepsCompleted > clues.length - 1) {
+                if (userHunt.stepsCompleted > clues.length - 1) {
                     setClue(clues[clues.length - 1])
                 } else {
                     setClue(clues[userHunt.stepsCompleted])
@@ -47,37 +48,59 @@ export const HunterProgress = () => {
 
     useEffect(
         () => {
+
+            const unlockClue = () => {
+                const copy = JSON.parse(JSON.stringify(userHunt))
+                copy.stepsCompleted++
+                delete copy.user
+                delete copy.hunt
+                UserHuntRepository.updateUserHunt(copy)
+                    .then(res => UserHuntRepository.get(res.id))
+                    .then((resUserHunt) => {
+                        setUserHunt(resUserHunt)
+                        if (resUserHunt.stepsCompleted > clues.length - 1) {
+                            setClue(clues[clues.length - 1])
+                        } else {
+                            setClue(clues[resUserHunt.stepsCompleted])
+                        }
+                    })
+            }
+
             if ("id" in currentClue) {
                 if (clues.length > userHunt.stepsCompleted) {
-                    const stepJS = [<div className="currentStep">
-                        <div className="stepNum">
-                            Current Clue: {clues.findIndex(clue => clue.id === currentClue?.id) + 1}
+                    const stepJS = [
+                        <div key={"currentStep"} className="currentStepProg">
+                            <div className="currentClueInfo">
+                                <div className="stepNum">
+                                    Current Clue: {clues.findIndex(clue => clue.id === currentClue?.id) + 1} of {clues.length}
+                                </div>
+                                <div className="clueText">
+                                    Hint: {currentClue.clueText}
+                                </div>
+                                <div className="clueAnswer">
+                                    Answer: {currentClue.clueAnswer}
+                                </div>
+                            </div>
+                            <button className="unlockClue" onClick={unlockClue}>
+                                Unlock Next Clue
+                            </button>
                         </div>
-                        <div className="clueText">
-                            Hint: {currentClue.clueText}
-                        </div>
-                        <div className="clueAnswer">
-                            Answer: {currentClue.clueAnswer}
-                        </div>
-                        <button className="unlockClue" onClick={unlockClue}>
-                            Unlock Next Clue
-                        </button>
-                    </div>]
+                    ]
                     setStepJSX(stepJS)
                 } else {
-                    const stepJS = [<div>
+                    const stepJS = [<div key={"currentStep"}>
                         <div>Hunt Complete!</div>
-                        <div>
+                        <div>Message Sent: {hunt.rewardText}</div>
+                        <div className="compeletedStepsBox">
+                            <h3>Completed Clues</h3>
                             {
-                                clues.map((clue, index) => {
-                                    return (<div key={`clue--${index}`}>
+                                clues.map((compClue, index) => {
+                                    return <div className="completedClueListing" key={`completedClue--${compClue.id}`}>
                                         <div>Clue {index + 1}</div>
-                                        <div>Hint: {clue.clueText}</div>
-                                        <div>Answer: {clue.clueAnswer}</div>
-                                    </div>)
-
-                                }
-                                )
+                                        <div>Hint: {compClue.clueText}</div>
+                                        <div>Answer: {compClue.clueAnswer}</div>
+                                    </div>
+                                })
                             }
                         </div>
                     </div>]
@@ -89,10 +112,18 @@ export const HunterProgress = () => {
 
     useEffect(
         () => {
+
+            const removeHunter = () => {
+                UserHuntRepository.deleteUserHunt(userHunt)
+                    .then(() => history.push(`/hunts/${hunt.id}`))
+            }
+
             if (typeof stepJSX[0] === 'object') {
-                const progJSX = [<>
-                    <h2 className="huntTitle">{hunt.title}</h2>
-                    <button className="backButton" onClick={() => history.goBack()}>Back</button>
+                const progJSX = [<div key={"title"}>
+                    <div className="header">
+                        <h2 className="huntTitle">{hunt.title}</h2>
+                        <button className="backButton" onClick={() => history.goBack()}>Back</button>
+                    </div>
                     <h3 className="hunterName">Hunter: {userHunt.user?.name}</h3>
                     <div>
                         {stepJSX}
@@ -103,11 +134,11 @@ export const HunterProgress = () => {
                             Remove Hunter
                         </button>
                     </div>
-                </>
+                </div>
                 ]
                 setProgressJSX(progJSX)
             }
-        }, [stepJSX]
+        }, [stepJSX, userHunt]
     )
 
     useEffect(
@@ -118,33 +149,15 @@ export const HunterProgress = () => {
         }, [progressJSX]
     )
 
-    const unlockClue = () => {
-        const copy = JSON.parse(JSON.stringify(userHunt))
-        copy.stepsCompleted++
-        delete copy.user
-        delete copy.hunt
-        UserHuntRepository.updateUserHunt(copy)
-            .then(res => UserHuntRepository.get(res.id))
-            .then((resUserHunt) => {
-                setUserHunt(resUserHunt)
-                if(resUserHunt.stepsCompleted > clues.length - 1) {
-                    setClue(clues[clues.length - 1])
-                } else {
-                    setClue(clues[resUserHunt.stepsCompleted])
-                }
-            })
-    }
 
-    const removeHunter = () => {
-        UserHuntRepository.deleteUserHunt(userHunt)
-            .then(() => history.push(`/hunts/${hunt.id}`))
-    }
+
+
 
     return <>
-        <div className="loading" style={{ visibility: loading ? "visible" : "hidden" }}>
+        <div key={"loading"} className="loading" style={{ visibility: loading ? "visible" : "hidden" }}>
             Loading...
         </div>
-        <div style={{ visibility: loading ? "hidden" : "visible" }}>
+        <div key={"hunterprog"} className="hunterProgBox" style={{ visibility: loading ? "hidden" : "visible" }}>
             {progressJSX}
         </div>
     </>
