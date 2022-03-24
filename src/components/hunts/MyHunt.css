@@ -37,7 +37,22 @@
     min-height: 75%;
     padding: 1em;
     margin-top: 1em;
+    animation: blink 1s linear infinite;
 }
+
+@keyframes blink {
+    0% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: .5;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
 
 
 .hunts[style*="visible"] { 
