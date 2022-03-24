@@ -40,7 +40,7 @@ export const InviteList = ({ toggleDialog, searchInput, hunt, userHunts, setUser
         let newUserHunt = {}
         if (hunt.id === -1) {
             const idToAdd = parseInt(event.target.id.split("--")[1])
-            const checkId = idToAdd != getCurrentUser()
+            const checkId = idToAdd != getCurrentUser().userId
             if(checkId) {
                 newUserHunt = {
                     userId: idToAdd,
@@ -65,7 +65,7 @@ export const InviteList = ({ toggleDialog, searchInput, hunt, userHunts, setUser
             }
         } else {
             const idToAdd = parseInt(event.target.id.split("--")[1])
-            const checkId = idToAdd != getCurrentUser()
+            const checkId = idToAdd != getCurrentUser().userId
             if(checkId) {
                 newUserHunt = {
                     huntId: parseInt(hunt.id),

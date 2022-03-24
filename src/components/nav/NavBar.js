@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import checkUser from "../../hooks/checkUser";
 import "./NavBar.css";
 
 export const NavBar = () => {
+
+    const { getCurrentUser } = checkUser()
+
     return (
         <div className="navBar">
             <div className="navbar__item">
@@ -20,6 +24,9 @@ export const NavBar = () => {
                     }>
                     Logout
                 </Link>
+            </div>
+            <div className="navbar__item">
+                {getCurrentUser().name}
             </div>
         </div>
     )

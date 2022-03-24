@@ -69,7 +69,7 @@ export const CreateHunt = () => {
         // }, true)
         if (huntCheck && clueCheck /*&& userHuntCheck*/) {
             // add userId to hunt
-            newHunt.userId = parseInt(getCurrentUser())
+            newHunt.userId = parseInt(getCurrentUser().userId)
             // add hunt to hunt database
             let addedHuntId = 0
             HuntRepository.addHunt(newHunt)
