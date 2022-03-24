@@ -30,7 +30,7 @@ export const Register = (props) => {
                         .then(res => res.json())
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
-                                localStorage.setItem("hunt_customer", createdUser.id)
+                                localStorage.setItem("hunt_customer", JSON.stringify({userId: createdUser.id, name: createdUser.name}))
                                 setConflictDialog(false)
                                 history.push("/home")
                             }

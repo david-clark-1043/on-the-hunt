@@ -4,8 +4,8 @@
 const checkUser = () => {
 
     const getCurrentUser = () => {
-        const userId = parseInt(localStorage.getItem("hunt_customer"))
-        return userId
+        const customerObject = JSON.parse(localStorage.getItem("hunt_customer"))
+        return customerObject
     }
 
     return { getCurrentUser }

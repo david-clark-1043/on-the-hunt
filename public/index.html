@@ -21,13 +21,45 @@
   <meta name="description" content="Follow your next scavenger hunt 'On The Hunt!'" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   <title>On The Hunt</title>
+  <style>
+    #pageLoading {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #pageLoading > div {
+      font-size: 5rem;
+      text-align: center;
+      animation: blink 2s infinite linear;
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: .25;
+      }
+
+      50% {
+        opacity: .75;
+      }
+
+      100% {
+        opacity: .25;
+      }
+    }
+
+  </style>
 </head>
 
 <body style="  background-color: rgba(255, 239, 213, 0.493);">
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root">
-    <div>Loading</div>
-
+    <div id="pageLoading">
+      <div>
+        Hunting...
+      </div>
+    </div>
   </div>
 
 </body>

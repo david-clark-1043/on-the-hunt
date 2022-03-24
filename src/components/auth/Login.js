@@ -21,7 +21,7 @@ export const Login = () => {
         existingUserCheck()
             .then(exists => {
                 if (exists) {
-                    localStorage.setItem("hunt_customer", exists.id)
+                    localStorage.setItem("hunt_customer", JSON.stringify({userId: exists.id, name: exists.name}))
                     setExistDialog(false)
                     history.push("/home")
                 } else {

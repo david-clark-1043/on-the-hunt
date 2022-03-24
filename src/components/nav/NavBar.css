@@ -9,8 +9,8 @@
 .navbar__item {
     /* margin: 0 1em 0 0; */
     /* border: dotted brown 1px; */
-    padding: .2em 1em;
-    border-radius: 1em;
+    padding: .2em .75em;
+    /* border-radius: 1em; */
 }
 
 @media screen and (max-width:700px) {

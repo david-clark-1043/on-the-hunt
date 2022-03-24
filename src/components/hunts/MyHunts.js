@@ -28,7 +28,7 @@ export const MyHunts = () => {
                 })
                 .then(setUserHunts)
                 .then(() => {
-                    return setUser(getCurrentUser())
+                    return setUser(getCurrentUser().userId)
                 })
                 .then(() => {
                 })

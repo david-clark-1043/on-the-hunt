@@ -39,7 +39,7 @@ export const Hunt = () => {
 
     useEffect(
         () => {
-            const user = getCurrentUser()
+            const user = getCurrentUser().userId
             const foundUserHunt = userHunts.find(uh => uh.huntId == parseInt(huntId) && uh.userId == user)
             setUserHunt(foundUserHunt)
         }, [userHunts]
@@ -50,11 +50,11 @@ export const Hunt = () => {
             Loading...
         </div>
         <div style={{ visibility: loading ? "hidden" : "visible" }}>
-        {getCurrentUser() === hunt.userId
+        {getCurrentUser().userId === hunt.userId
             ? <HuntCreator
                 hunt={hunt}
                 userHunts={userHunts}
-                currentUser={getCurrentUser()}
+                currentUser={getCurrentUser().userId}
                 clues={clues}
                 setUserHunts={setUserHunts}
                 setClues={setClues}
@@ -64,7 +64,7 @@ export const Hunt = () => {
             : <HuntParticipant
                 hunt={hunt}
                 userHunt={userHunt}
-                currentUser={getCurrentUser()}
+                currentUser={getCurrentUser().userId}
                 clues={clues}
                 setUserHunts={setUserHunts}
                 setClues={setClues}

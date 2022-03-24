@@ -38,3 +38,29 @@
     margin: 0;
     padding: 0;
 }
+
+.checkingLocation {
+    display: flex;
+    flex-direction: column;    
+    justify-content: space-evenly;
+}
+
+.checkingLocation > div {
+    text-align: center;
+    font-size: 3rem;
+    animation: blink 2s linear infinite;
+}
+
+@keyframes blink {
+    0% {
+      opacity: .25;
+    }
+
+    50% {
+      opacity: .75;
+    }
+
+    100% {
+      opacity: .25;
+    }
+  }
