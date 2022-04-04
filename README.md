@@ -2,7 +2,7 @@
 
 On the Hunt is a website for creating and sharing scavenger hunts.  
 A live version is deployed [here](https://on-the-hunt-yev5h.ondigitalocean.app)!  
-See a live demostrantion [here](https://www.linkedin.com/posts/davidclark1043_github-onthehunt-activity-6911792680662368256-K0wB?utm_source=linkedin_share&utm_medium=member_desktop_web)!
+See a live demostration [here](https://www.linkedin.com/posts/davidclark1043_github-onthehunt-activity-6911792680662368256-K0wB?utm_source=linkedin_share&utm_medium=member_desktop_web)!
 
 In this document:
 - [Motivation](#motivation-for-this-project)
