@@ -6,7 +6,7 @@ See a live demostration [here](https://www.linkedin.com/posts/davidclark1043_git
 
 In this document:
 - [Motivation](#motivation-for-this-project)
-- [How it works](#how-it-works)
+- [How it works](#how-on-the-hunt-works)
 - [How it was developed](#how-on-the-hunt-was-developed)
 - [How to install and run it yourself](#how-to-install-and-run-this-project)
 - [Lessons Learned](#difficultieslessons-learned)
@@ -29,7 +29,15 @@ Once logged in, users can see what hunts they have created and ones for which th
 
 The New Hunt link takes the user to a creation page where they can add a hunt title, reward text that is displayed upon completion, and clues for the steps of the hunt. Clues include a hint, answer, and if it is a location clue, coordinates for the location.
 
+<p align="center">
+  <img src="/CreateHunt.gif" width="372" height="310" />
+ </p>
+
 When viewing a hunt the user created, options are displayed for editing and deleting clues, inviting additional people to try the scavenger hunt, and deleting the hunt itself.
+
+<p align="center">
+  <img src="/HuntOwner.gif" width="372" height="310" />
+</p>
 
 When viewing a hunt the user is participating in, the user can see the current clue hint, a list of completed clues, and how many clues are in the hunt.
 
