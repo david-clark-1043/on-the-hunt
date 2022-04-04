@@ -29,6 +29,10 @@ Once logged in, users can see what hunts they have created and ones for which th
 
 The New Hunt link takes the user to a creation page where they can add a hunt title, reward text that is displayed upon completion, and clues for the steps of the hunt. Clues include a hint, answer, and if it is a location clue, coordinates for the location.
 
+<p align="center">
+  <img src="/CreateHunt.gif" width="372" height="310" />
+ </p>
+
 When viewing a hunt the user created, options are displayed for editing and deleting clues, inviting additional people to try the scavenger hunt, and deleting the hunt itself.
 
 When viewing a hunt the user is participating in, the user can see the current clue hint, a list of completed clues, and how many clues are in the hunt.
